@@ -53,7 +53,7 @@
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href="/cadastroaluno"><i class="app-menu__icon fa fa-graduation-cap"></i><span class="app-menu__label">Alunos</span></a></li>
+        <li><a class="app-menu__item" href="/salvaraluno"><i class="app-menu__icon fa fa-graduation-cap"></i><span class="app-menu__label">Alunos</span></a></li>
 		<li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Professores</span></a></li>
 		<li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label">Coordenadores</span></a></li>
        <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Biblioteca</span></a></li>
@@ -77,22 +77,28 @@
           <div class="tile">
             <h3 class="tile-title">Formulário</h3>
             <div class="tile-body">
-              <form class="row" action="salvaraluno" method="post">
+              <form class="row" action="salvaraluno" method="post" th:object="${alunoobj}">      
+                <div class="form-group col-md-4">
+                  <label class="control-label">Id</label>
+                  <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
+                </div>     
                 <div class="form-group col-md-4">
                   <label class="control-label">Name</label>
-                  <input class="form-control" type="text" placeholder="Primeiro nome" name="nome" required="required">
+                  <input class="form-control" type="text" placeholder="Primeiro nome" name="nome" required="required" th:field="*{nome}">
                 </div>
+                
                 <div class="form-group col-md-4">
                   <label class="control-label">Sobrenome</label>
-                  <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" required="required">
+                  <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" required="required" th:field="*{sobrenome}">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
 	                  <label class="control-label">E-mail</label>
-	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email" required="required">
+	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email" required="required" th:field="*{email}">
                 </div>
+              
                 <div class="form-group col-md-5 align-self-end">
-                   <button class="btn btn-primary" type="submit">Salvar</button>
-                   <a class="btn btn-success" href="/listaAlunos">Listar Alunos</a>
+                   <button class="btn btn-primary" type="submit" ><i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar</button>
+                   <a class="btn btn-success" href="/listaAlunosCadastro">Listar Alunos</a>
                    <a class="btn btn-danger" href="/listaAlunos" title="Gerar PDF"><i class="fa fa-file-pdf-o"></i>Gerar PDF</a>
                 </div>
               </form>
@@ -125,8 +131,8 @@
                       <td th:text= "${aluno.nome}"> </td>
                       <td th:text="${aluno.sobrenome}"> </td>
                       <td th:text=${aluno.email}></td>
-                      <td><a class="btn btn-warning" href="/cadastroaluno" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
-                      <td><a class="btn btn-danger" href="/cadastroaluno" title="Deletar Aluno"><i class="fa fa-trash-o"></i></a></td>
+                      <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
+                      <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -162,6 +168,14 @@
     <!-- Data table plugin-->
     <script type="text/javascript" src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
+    
+    
+        <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script type="text/javascript" src="/bootstrap/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/plugins/sweetalert.min.js"></script>
+    
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <!-- Google analytics script-->
     <script type="text/javascript">
@@ -173,6 +187,36 @@
       	ga('create', 'UA-72504830-1', 'auto');
       	ga('send', 'pageview');
       }
+    </script>
+    
+    <script type="text/javascript">
+      $('#demoNotify').click(function(){
+      	$.notify({
+      		title: "Update Complete : ",
+      		message: "Something cool is just updated!",
+      		icon: 'fa fa-check' 
+      	},{
+      		type: "info"
+      	});
+      });
+      $('#demoSwal').click(function(){
+      	swal({
+      		title: "Are you sure?",
+      		text: "You will not be able to recover this imaginary file!",
+      		type: "warning",
+      		showCancelButton: true,
+      		confirmButtonText: "Yes, delete it!",
+      		cancelButtonText: "No, cancel plx!",
+      		closeOnConfirm: false,
+      		closeOnCancel: false
+      	}, function(isConfirm) {
+      		if (isConfirm) {
+      			swal("Deleted!", "Your imaginary file has been deleted.", "success");
+      		} else {
+      			swal("Cancelled", "Your imaginary file is safe :)", "error");
+      		}
+      	});
+      });
     </script>
     
   </body>

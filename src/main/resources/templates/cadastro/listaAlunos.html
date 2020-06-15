@@ -106,7 +106,7 @@
             <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
           </ul>
         </li>
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
             <li><a class="treeview-item active" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
@@ -165,8 +165,8 @@
                       <td th:text= "${aluno.nome}"> </td>
                       <td th:text="${aluno.sobrenome}"> </td>
                       <td th:text=${aluno.email}></td>
-                      <td><a class="btn btn-warning" href="/cadastroaluno" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
-                      <td><a class="btn btn-danger" href="/cadastroaluno" title="Deletar Aluno"><i class="fa fa-trash-o"></i></a></td>
+                      <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
+                      <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-trash"></span></a></td>
                     </tr>
                   </tbody>
                 </table>
