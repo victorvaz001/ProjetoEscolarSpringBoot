@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     
@@ -26,7 +28,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Sair</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out fa-lg"></i> Sair</a></li>
           </ul>
         </li>
       </ul>
@@ -41,46 +43,19 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Inicio</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Cursos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Todos os cursos</a></li>
-            <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Cadastar Curso</a></li>
-          </ul>
-        </li>
-        
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-graduation-cap"></i><span class="app-menu__label">Alunos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-		<ul class="treeview-menu">
-            <li><a class="treeview-item" href="/cadastroaluno"><i class="icon fa fa-circle-o"></i>Cadastrar Alunos</a></li>
-            <li><a class="treeview-item" href="/listaAlunos"><i class="icon fa fa-circle-o"></i>Lista de alunos</a></li>
-        </ul>
-		
-		<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Professores</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-		<ul class="treeview-menu">
-            <li><a class="treeview-item" href="/cadastroaluno"><i class="icon fa fa-circle-o"></i>Cadastrar Professores</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Lista de Professores</a></li>
-        </ul>
-		
-		<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label">Coordenadores</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-		<ul class="treeview-menu">
-            <li><a class="treeview-item" href="/cadastroaluno"><i class="icon fa fa-circle-o"></i>Cadastrar Coordenadores</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Lista de Coordenadores</a></li>
-        </ul>
-        
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Biblioteca</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-       <ul class="treeview-menu">
-            <li><a class="treeview-item" href="/cadastroaluno"><i class="icon fa fa-circle-o"></i>Cadastrar Livros</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Lista de Livros</a></li>
-        </ul>
-       
-       
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i><span class="app-menu__label">Sair</span></a></li>
+        <li><a class="app-menu__item" href="/acessosistema"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Inicio</span></a></li>
+       <li><a class="app-menu__item" href="/cadastroaluno"><i class="app-menu__icon fa fa-graduation-cap"></i><span class="app-menu__label">Alunos</span></a></li>
+	   <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Professores</span></a></li>
+		<li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Biblioteca</span></a></li>
+        <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i><span class="app-menu__label">Sair</span></a></li>
       </ul>
     </aside>
     <main class="app-content">
+
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-user-circle-o"></i> Olá Admin</h1>
+          <h1><i class="fa fa-user-circle-o"></i> Olá usuário </h1>
+         
          
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -88,34 +63,50 @@
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
         </ul>
       </div>
-    	<div class="row">
-        <div class="col-md-4 col-lg-4">
-          <div class="widget-small primary coloured-icon"><a href="#" style="text-decoration: none;"><i class="icon fa fa-graduation-cap"></i></a>
-            <div class="info">
-             <h4><a href="#" style="text-decoration: none;">Alunos matriculados</a></h4>
-              <p><a href="#" style="text-decoration: none;"><b>5</b></a></p>
+                <div class="form-group col-md-5 align-self-end">
+                   <a class="btn btn-primary" type="submit" href="/cadastroaluno" data-toggle="tooltip"  data-original-title="Cadastrar novo aluno"><i class="fa fa-user-plus"></i>Novo aluno</a>
+                   <a class="btn btn-danger" href="#" data-toggle="tooltip"  data-original-title="Gerar PDF"><i class="fa fa-file-pdf-o"></i>Gerar PDF</a>
+                </div>
+         <br/>
+         <br/>
+         <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  
+                  <thead style="text-align: center;">
+                    <tr>
+                   	  <th>ID</th>
+                      <th>Nome</th>
+                      <th>Sobrenome</th>
+                      <th>Email</th>
+                      <th >Editar</th>
+                      <th >Deltar</th>
+                      <th >Detalhes</th>
+                    </tr>
+                  </thead>
+                  <tbody style="text-align: center;">
+                    <tr th:each="aluno : ${alunos}">
+                      <td th:text= "${aluno.id}"></td>
+                      <td th:text= "${aluno.nome}"> </td>
+                      <td th:text="${aluno.sobrenome}"> </td>
+                      <td th:text=${aluno.email}></td>
+                      <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}"  data-toggle="tooltip"  data-original-title="Editar aluno"><span class="fa fa-pencil-square-o"></span></a></td>
+                      <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}"  data-toggle="tooltip"  data-original-title="Deletar aluno" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+                   	  <td><a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Detalhes do aluno"><i class="fa fa-info-circle"></i>Info</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 col-lg-4">
-          <div class="widget-small info coloured-icon"><a href="#" style="text-decoration: none;"><i class="icon fa fa-sticky-note-o"></i></a>
-            <div class="info">
-              <h4><a href="#" style="text-decoration: none;">Lançar Notas</a></h4>
-              <p><a href="#" style="text-decoration: none;"><b>15</b></a></p>
-            </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small warning coloured-icon"><a href="#" style="text-decoration: none;"><i class="icon fa fa-users fa-3x"></i></a>
-            <div class="info">
-              <h4><a href="#" style="text-decoration: none;">Chamada</a></h4>
-              <p><a href="#" style="text-decoration: none;"><b>30</b></a></p>
-            </div>
           </div>
-        </div>
-      </div>
+          
     </main>
-    <!-- Essential javascripts for application to work-->
+       <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="/bootstrap/js/popper.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -124,7 +115,27 @@
     <script src="/bootstrap/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Google analytics script-->
-    <script type="text/javascript">
+
+    
+       <!-- The javascript plugin to display page loading on top-->
+    <script src="/bootstrap/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
+    
+    
+        <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script type="text/javascript" src="/bootstrap/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/plugins/sweetalert.min.js"></script>
+    
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+     <script type="text/javascript" src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
+
+  <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
       	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -134,5 +145,7 @@
       	ga('send', 'pageview');
       }
     </script>
+	
+
   </body>
 </html>

@@ -19,7 +19,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-graduation-cap"></i> Colégio Fernandez</a>
+    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-user-plus"></i> Colégio Fernandez</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -78,16 +78,16 @@
             <h3 class="tile-title">Formulário</h3>
             <div class="tile-body">
               <form class="row" action="salvaraluno" method="post" th:object="${alunoobj}">      
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                   <label class="control-label">Id</label>
                   <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
                 </div>     
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                   <label class="control-label">Name</label>
                   <input class="form-control" type="text" placeholder="Primeiro nome" name="nome" required="required" th:field="*{nome}">
                 </div>
                 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                   <label class="control-label">Sobrenome</label>
                   <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" required="required" th:field="*{sobrenome}">
                 </div>
@@ -97,50 +97,14 @@
                 </div>
               
                 <div class="form-group col-md-5 align-self-end">
-                   <button class="btn btn-primary" type="submit" ><i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar</button>
-                   <a class="btn btn-success" href="/listaAlunosCadastro">Listar Alunos</a>
-                   <a class="btn btn-danger" href="/listaAlunos" title="Gerar PDF"><i class="fa fa-file-pdf-o"></i>Gerar PDF</a>
+                   <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>
+                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip"  data-original-title="Listar alunos"><i class="fa fa-list-alt"></i>Cancelar</a>
                 </div>
               </form>
             </div>
           </div>
         </div>
-          <div class="row">
-        <div class="col-md-12">
-         
-         <br/>
-         <br/>
-          <div class="tile">
-            <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
-                  
-                  <thead style="text-align: center;">
-                    <tr>
-                   	  <th>ID</th>
-                      <th>Nome</th>
-                      <th>Sobrenome</th>
-                      <th>Email</th>
-                      <th >Editar</th>
-                      <th >Deletar</th>
-                    </tr>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    <tr th:each="aluno : ${alunos}">
-                      <td th:text= "${aluno.id}"></td>
-                      <td th:text= "${aluno.nome}"> </td>
-                      <td th:text="${aluno.sobrenome}"> </td>
-                      <td th:text=${aluno.email}></td>
-                      <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
-                      <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
@@ -151,16 +115,7 @@
     <script src="/bootstrap/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Google analytics script-->
-    <script type="text/javascript">
-      if(document.location.hostname == 'pratikborsadiya.in') {
-      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      	ga('create', 'UA-72504830-1', 'auto');
-      	ga('send', 'pageview');
-      }
-    </script>
+
     
        <!-- The javascript plugin to display page loading on top-->
     <script src="/bootstrap/js/plugins/pace.min.js"></script>
@@ -177,8 +132,10 @@
     <script type="text/javascript" src="/bootstrap/js/plugins/sweetalert.min.js"></script>
     
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
-    <!-- Google analytics script-->
-    <script type="text/javascript">
+     <script type="text/javascript" src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
+
+  <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
       	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -188,36 +145,5 @@
       	ga('send', 'pageview');
       }
     </script>
-    
-    <script type="text/javascript">
-      $('#demoNotify').click(function(){
-      	$.notify({
-      		title: "Update Complete : ",
-      		message: "Something cool is just updated!",
-      		icon: 'fa fa-check' 
-      	},{
-      		type: "info"
-      	});
-      });
-      $('#demoSwal').click(function(){
-      	swal({
-      		title: "Are you sure?",
-      		text: "You will not be able to recover this imaginary file!",
-      		type: "warning",
-      		showCancelButton: true,
-      		confirmButtonText: "Yes, delete it!",
-      		cancelButtonText: "No, cancel plx!",
-      		closeOnConfirm: false,
-      		closeOnCancel: false
-      	}, function(isConfirm) {
-      		if (isConfirm) {
-      			swal("Deleted!", "Your imaginary file has been deleted.", "success");
-      		} else {
-      			swal("Cancelled", "Your imaginary file is safe :)", "error");
-      		}
-      	});
-      });
-    </script>
-    
   </body>
 </html>

@@ -130,8 +130,8 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Data Table</h1>
-          <p>Table to display analytical data effectively</p>
+          <h1><i class="fa fa-graduation-cap"></i> Detalhes do aluno</h1>
+          <p></p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -140,41 +140,75 @@
         </ul>
       </div>
       <div class="row">
-        <div class="col-md-12">
-         <a class="btn btn-primary" href="/cadastroaluno"><i class="fa fa-graduation-cap"></i>Adicionar aluno</a>
-         <br/>
-         <br/>
+       <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
-                  
-                  <thead style="text-align: center;">
-                    <tr>
-                   	  <th>ID</th>
-                      <th>Nome</th>
-                      <th>Sobrenome</th>
-                      <th>Email</th>
-                      <th >Editar</th>
-                      <th >Deletar</th>
-                    </tr>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    <tr th:each="aluno : ${alunos}">
-                      <td th:text= "${aluno.id}"></td>
-                      <td th:text= "${aluno.nome}"> </td>
-                      <td th:text="${aluno.sobrenome}"> </td>
-                      <td th:text=${aluno.email}></td>
-                      <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-pencil-square-o"></span></a></td>
-                      <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}" title="Editar Aluno" ><span class="fa fa-trash"></span></a></td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div th:each="aluno: ${alunoobj}">
+              <div class="form-group row">
+                  <label class="control-label col-md-2"><b>Id:</b></label>
+                  <span th:text="${aluno.id}"> </span>
+                </div>
+                
+                 <div class="form-group row">
+                  <label class="control-label col-md-2"><b>Nome:</b></label>
+                  <span th:text="${aluno.nome}"> </span>
+                </div>
+                
+              <div class="form-group row">
+                  <label class="control-label col-md-2"><b>sobrenome:</b></label>
+                  <span th:text="${aluno.sobrenome}"> </span>
+                </div>  
+                
+                  <div class="form-group row">
+                  <label class="control-label col-md-2"><b>E-mail:</b></label>
+                  <span th:text="${aluno.email}"> </span>
+                </div>
               </div>
+              
+            </div>
+         <hr/>
+          <div class="clearix"></div>
+        <div class="col-md-12">
+          
+            <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone</i></h3>
+            <div class="tile-body">
+              <form class="row"  th:action="@{/addfonePessoa/{alunoid}(alunoid=${alunoobj.id})}" method="post">
+                <div class="form-group col-md-3">
+                  <label for="numeroaluno" class="control-label">Numero:</label>
+                  <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" required="required">
+                </div>
+                
+                 <div class="form-group col-md-4">
+                  <label for="numeroaluno" class="control-label">Tipo:</label>
+                  <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" required="required">
+                </div> 
+                  
+                <div class="form-group col-md-5 align-self-end">
+                  <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Adicionar </button>
+                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Lista de alunos</a>
+             	 </div>
+              </form>
             </div>
           </div>
+          
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Numero:</th>
+                  <th>Tipo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="fone : ${telefones}">
+                  <td th:text="${fone.numero}"></td>
+                  <td th:text="${fone.tipo}"></td>
+                </tr>
+              </tbody>
+            </table>
+          
         </div>
       </div>
+        </div>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
