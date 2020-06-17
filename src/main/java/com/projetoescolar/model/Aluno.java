@@ -5,12 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Aluno implements Serializable {
@@ -20,9 +21,30 @@ public class Aluno implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotNull(message = "Nome não pode nulo")
+	@NotEmpty(message = "Nome não pode ser vazio")
 	private String nome;
+	
+	
+	@NotNull(message = "Sobrenome não pode ser nulo")
+	@NotEmpty(message = "Sobrenome não poder vazio")
 	private String sobrenome;
+	
+	@NotEmpty(message = "E-mail não pode ser vazio")
+	@NotNull(message = "E-mail não pode ser nulo")
 	private String email;
+	
+	@Min(value = 18, message = "Idade invalida, minimo 18 anos")
+	private int idade;
+	
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	
+	public int getIdade() {
+		return idade;
+	}
 
 	@OneToMany(mappedBy = "aluno", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;

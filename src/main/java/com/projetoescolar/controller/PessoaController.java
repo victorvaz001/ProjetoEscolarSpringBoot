@@ -1,9 +1,15 @@
 package com.projetoescolar.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +55,23 @@ public class PessoaController {
 
 	//ao clicar em salvar, via botao do formulario
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvaraluno")
-	public ModelAndView salvar(Aluno aluno) {
+	public ModelAndView salvar(@Valid Aluno aluno, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("cadastro/cadastroaluno");
+			Iterable<Aluno> alunoIt  = alunoRepository.findAll();
+			modelAndView.addObject("alunos", alunoIt);
+			modelAndView.addObject("alunoobj", aluno);
+			
+			List<String> msg = new ArrayList<String>(); /*Mostrar as validaçoes*/
+			for(ObjectError objectError : bindingResult.getAllErrors()) {
+				msg.add(objectError.getDefaultMessage()); /*vem das anotações do model Aluno @NotEmpety e outras*/
+			}
+			
+			modelAndView.addObject("msg", msg);
+			return modelAndView;
+		}
+		
 		
 		alunoRepository.save(aluno);
 		ModelAndView andView = new ModelAndView("acesso/acessosistema");
@@ -88,11 +110,36 @@ public class PessoaController {
 	public ModelAndView addfonePessoa(Telefone telefone, @PathVariable("alunoid") Long alunoid) {
 		
 		Aluno aluno = alunoRepository.findById(alunoid).get();
-		telefone.setAluno(aluno);
+		
+		if(telefone != null && telefone.getNumero().isEmpty() || telefone.getTipo().isEmpty()) {
+			
+			ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+			modelAndView.addObject("alunoobj", aluno);
+			modelAndView.addObject("telefones", telefoneRepository.getTelefones(alunoid));
+			
+			List<String> msg = new ArrayList<String>(); /*Mostrar as validaçoes*/
+			if(telefone.getNumero().isEmpty()) {
+				msg.add("Número deve ser inforfamado");
+			}
+			
+			if (telefone.getTipo().isEmpty()) {
+				msg.add("Tipo deve ser informado");
+				
+			}
+			
+			modelAndView.addObject("msg", msg);
+			
+			return modelAndView;
+			
+		}
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		
 		telefoneRepository.save(telefone);
 		
-		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		
+		telefone.setAluno(aluno);
+		
 		modelAndView.addObject("alunoobj", aluno);
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(alunoid));
 		

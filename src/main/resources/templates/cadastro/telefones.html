@@ -163,6 +163,11 @@
                   <label class="control-label col-md-2"><b>E-mail:</b></label>
                   <span th:text="${aluno.email}"> </span>
                 </div>
+                
+                <div class="form-group row">
+                  <label class="control-label col-md-2"><b>Idade:</b></label>
+                  <span th:text="${aluno.idade}"> </span>
+                </div>
               </div>
               
             </div>
@@ -171,16 +176,22 @@
         <div class="col-md-12">
           
             <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone</i></h3>
+            <br/>
+            	<div th:each="m : ${msg}">
+            	<span th:text = "${m}"> </span>
+            	</div>
+            <br/>
+            
             <div class="tile-body">
-              <form class="row"  th:action="@{/addfonePessoa/{alunoid}(alunoid=${alunoobj.id})}" method="post">
+              <form class="row"  th:action="@{/addfonePessoa/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
                 <div class="form-group col-md-3">
                   <label for="numeroaluno" class="control-label">Numero:</label>
-                  <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" required="required">
+                  <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" id="numero">
                 </div>
                 
                  <div class="form-group col-md-4">
                   <label for="numeroaluno" class="control-label">Tipo:</label>
-                  <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" required="required">
+                  <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" id="tipo">
                 </div> 
                   
                 <div class="form-group col-md-5 align-self-end">
@@ -235,5 +246,32 @@
       	ga('send', 'pageview');
       }
     </script>
+    
+    <script type="text/javascript">
+    
+    	function validarCampos(){
+
+    		numero = document.getElementById('numero').value;
+    		tipo = document.getElementById('tipo').value;
+    		
+    		if(numero === ''){
+    			alert('Número deve ser informado');
+    			document.getElementById('numero').focus();    			
+    			return false;
+    		}
+    		else if(tipo === ''){
+    			alert('Tipo de ser informado');
+    			document.getElementById('tipo').focus();
+    			return false;
+    		}
+    		
+    		return true;
+    		
+    		
+    	}
+    
+    
+    </script>
+    
   </body>
 </html>
