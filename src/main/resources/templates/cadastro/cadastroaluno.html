@@ -74,28 +74,36 @@
             	</div>
             <br/>
               <form class="row" action="salvaraluno" method="post" th:object="${alunoobj}">      
-                <div class="form-group col-md-2">
-                  <label class="control-label">Matricula</label>
+                <div class="form-group col-md-4">
+                  <label class="control-label">Matricula:</label>
                   <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
                 </div>     
-                <div class="form-group col-md-5">
-                  <label class="control-label">Name</label>
+                <div class="form-group col-md-4">
+                  <label class="control-label">Name:</label>
                   <input class="form-control" type="text" placeholder="Primeiro nome" name="nome"  th:field="*{nome}">
                 </div>
                 
-                <div class="form-group col-md-5">
-                  <label class="control-label">Sobrenome</label>
+                <div class="form-group col-md-4">
+                  <label class="control-label">Sobrenome:</label>
                   <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" th:field="*{sobrenome}">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
 	                  <label class="control-label">E-mail</label>
 	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email"  th:field="*{email}">
                 </div>
                 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
 	                  <label class="control-label">Idade:</label>
 	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}">
                 </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="status">Status:</label>
+                    <select class="form-control"  th:field="*{status}" id="status">
+                      <option th:each="s : ${T(com.projetoescolar.model.Status).values()}" 
+                      th:value="${s.valor}" th:text="${s.nome}"/>
+                    </select>
+                  </div>
               
                 <div class="form-group col-md-5 align-self-end">
                    <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>

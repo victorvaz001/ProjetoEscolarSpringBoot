@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,6 +39,21 @@ public class Aluno implements Serializable {
 	
 	@Min(value = 18, message = "Idade invalida, minimo 18 anos")
 	private int idade;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	public void setIdade(int idade) {
 		this.idade = idade;
