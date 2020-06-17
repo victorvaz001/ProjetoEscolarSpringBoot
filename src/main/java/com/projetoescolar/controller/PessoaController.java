@@ -100,7 +100,7 @@ public class PessoaController {
 	}
 	
 	@GetMapping("/removeraluno/{idaluno}")
-	public ModelAndView remover(@PathVariable("idaluno") Long idaluno) {
+	public ModelAndView removerPessoa(@PathVariable("idaluno") Long idaluno) {
 		
 		 alunoRepository.deleteById(idaluno);
 		
@@ -108,6 +108,19 @@ public class PessoaController {
 		 modelAndView.addObject("alunos", alunoRepository.findAll());
 		 modelAndView.addObject("alunoobj", new Aluno());
 		 
+		 return modelAndView;
+	}
+	
+	@GetMapping("/removertelefone/{idtelefone}")
+	public ModelAndView removerTelefone(@PathVariable("idtelefone") Long idtelefone) {
+		
+		Aluno aluno = telefoneRepository.findById(idtelefone).get().getAluno();
+		
+		telefoneRepository.deleteById(idtelefone);
+		
+	     ModelAndView modelAndView =  new ModelAndView("cadastro/telefones");
+	     modelAndView.addObject("alunoobj", aluno);
+	     modelAndView.addObject("telefones", telefoneRepository.getTelefones(aluno.getId()));
 		 return modelAndView;
 	}
 

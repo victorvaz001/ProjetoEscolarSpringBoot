@@ -24,7 +24,7 @@ public class Aluno implements Serializable {
 	private String sobrenome;
 	private String email;
 
-	@OneToMany(mappedBy = "aluno")
+	@OneToMany(mappedBy = "aluno", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
 	public void setTelefones(List<Telefone> telefones) {

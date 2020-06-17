@@ -196,12 +196,14 @@
                 <tr>
                   <th>Numero:</th>
                   <th>Tipo</th>
+                  <th>Excluir</th>
                 </tr>
               </thead>
               <tbody>
                 <tr th:each="fone : ${telefones}">
                   <td th:text="${fone.numero}"></td>
                   <td th:text="${fone.tipo}"></td>
+                  <td><a class="btn btn-danger" th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}"  data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                 </tr>
               </tbody>
             </table>
