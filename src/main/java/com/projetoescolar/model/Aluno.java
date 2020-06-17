@@ -46,7 +46,7 @@ public class Aluno implements Serializable {
 		return idade;
 	}
 
-	@OneToMany(mappedBy = "aluno", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
 	public void setTelefones(List<Telefone> telefones) {

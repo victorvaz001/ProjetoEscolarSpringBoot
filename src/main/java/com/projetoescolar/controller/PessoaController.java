@@ -78,6 +78,7 @@ public class PessoaController {
 		Iterable<Aluno> alunoIt  = alunoRepository.findAll();
 		andView.addObject("alunos", alunoIt);
 		andView.addObject("alunoobj", new Aluno());
+		
 		return andView;
 	}
 	
