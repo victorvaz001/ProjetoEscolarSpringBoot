@@ -95,7 +95,7 @@
                       <td th:text=${aluno.email}></td>
                       <td><a class="btn btn-warning" th:href="@{/editaraluno/{idaluno}(idaluno=${aluno.id})}"  data-toggle="tooltip"  data-original-title="Editar aluno"><span class="fa fa-pencil-square-o"></span></a></td>
                       <td><a class="btn btn-danger" th:href="@{/removeraluno/{idaluno}(idaluno=${aluno.id})}"  data-toggle="tooltip"  data-original-title="Deletar aluno" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
-                   	  <td><a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Detalhes do aluno"><i class="fa fa-info-circle"></i>Info</a></td>
+                   	  <td><a class="btn btn-info" th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Detalhes do aluno"><i class="fa fa-info-circle"></i>Info</a></td>
                     </tr>
                   </tbody>
                 </table>

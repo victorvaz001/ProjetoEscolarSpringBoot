@@ -55,7 +55,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1>Perfil</h1>
+          <h1>Telefones</h1>
           <p></p>
         </div>
            <ul class="app-breadcrumb breadcrumb">
@@ -70,34 +70,19 @@
             <section class="invoice">
               <div class="row mb-4">
                 <div class="col-6" th:each="aluno_ : ${alunoobj}">
-                  <h3 class="page-header"><i class="fa fa-graduation-cap"></i> <span th:text="${aluno_.nome}"></span> <span th:text="${aluno_.sobrenome}"></span></h3>
+                  <h4 class="page-header"><span th:text="${aluno_.nome}"></span> <span th:text="${aluno_.sobrenome}"></span> </h4>
                 </div>
+                
+                
                 <div class="col-6">
-                  <h5 class="text-right">Data:<span id="demo"></span></h5>
+                  <h5 class="text-right"><span id="demo"> </span></h5>
                 </div>
               </div>
-              <div class="row invoice-info" th:each="aluno: ${alunoobj}">
-                <div class="col-4"> <strong>Sobre:</strong>
-                  <address>Matricula:
-                 <span th:text="${aluno.id}"> </span><br>
-                 Idade:
-                 <span th:text="${aluno.idade}"> </span>
-                </address>
+              <div class="row invoice-info" th:each="aluno : ${alunoobj}">
+                <div class="col-4">
+                  <address><strong>Matricula:</strong><span th:text=${aluno.id}> </span></address><br/> 
                 </div>
-                <div class="col-4"><strong>Dados de contato:</strong>
-                  <address>Email:
-                  <span th:text="${aluno.email}"> </span><br>
-                  
-                  </address>
-                </div>
-                 <div class="col-4"><strong>Dados academicos:</strong>
-                  <address>Status:
-                  <span th:text="${aluno.status}"> </span><br>
-                  
-                  </address>
-                </div>
-                
-                
+
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
@@ -118,6 +103,7 @@
                 <div class="form-group col-md-5 align-self-end">
                   <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Salvar </button>
                   <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Listar de alunos</a>
+         
              	 </div>
               </form>
             </div>

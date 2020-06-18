@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projetoescolar.model.Aluno;
+import com.projetoescolar.model.Cursos;
 import com.projetoescolar.model.Telefone;
 import com.projetoescolar.repository.AlunoRepository;
+import com.projetoescolar.repository.CursoRepository;
 import com.projetoescolar.repository.TelefoneRepository;
 
 @Controller
@@ -30,6 +32,9 @@ public class PessoaController {
 	
 	@Autowired
 	private TelefoneRepository telefoneRepository;
+	
+	@Autowired
+	private CursoRepository cursoRepository;
 
 	//Ao clicar no link(Cad.Aluno) /acessosistema no index
 	@RequestMapping(method = RequestMethod.GET, value = "/acessosistema")
@@ -44,11 +49,26 @@ public class PessoaController {
 	}
 	
 	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
+	@GetMapping("/detalhealuno/{idaluno}")
+	public ModelAndView detalhesAluno(@PathVariable("idaluno") Long idaluno) {
+		
+		Optional<Aluno> aluno = alunoRepository.findById(idaluno);
+		 
+		 ModelAndView modelAndView =  new ModelAndView("cadastro/detelhesaluno");
+		 modelAndView.addObject("alunoobj", aluno.get());
+		 modelAndView.addObject("cursos", cursoRepository.findAll());
+		 modelAndView.addObject("cursoobj", aluno.get().getCurso());
+		 
+		 return modelAndView;
+	}
+	
+	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastroaluno")
 	public ModelAndView inicioCadastroAluno() {
 		
 		 ModelAndView modelAndView =  new ModelAndView("cadastro/cadastroaluno");
 		 modelAndView.addObject("alunoobj", new Aluno());
+		 modelAndView.addObject("cursos", cursoRepository.findAll());
 		 return modelAndView;
 	}
 	
@@ -69,6 +89,7 @@ public class PessoaController {
 			}
 			
 			modelAndView.addObject("msg", msg);
+			modelAndView.addObject("cursos", cursoRepository.findAll());
 			return modelAndView;
 		}
 		
@@ -90,6 +111,7 @@ public class PessoaController {
 		 
 		 ModelAndView modelAndView =  new ModelAndView("cadastro/cadastroaluno");
 		 modelAndView.addObject("alunoobj", aluno.get());
+		 modelAndView.addObject("cursos", cursoRepository.findAll());
 		
 		 return modelAndView;
 	}
@@ -103,6 +125,8 @@ public class PessoaController {
 		 ModelAndView modelAndView =  new ModelAndView("cadastro/telefones");
 		 modelAndView.addObject("alunoobj", aluno.get());
 		 modelAndView.addObject("telefones", telefoneRepository.getTelefones(idaluno));
+		 modelAndView.addObject("cursos", cursoRepository.findAll());
+		 modelAndView.addObject("cursoobj", aluno.get().getCurso());
 		
 		 return modelAndView;
 	}
@@ -129,7 +153,6 @@ public class PessoaController {
 			}
 			
 			modelAndView.addObject("msg", msg);
-			
 			return modelAndView;
 			
 		}
@@ -143,7 +166,6 @@ public class PessoaController {
 		
 		modelAndView.addObject("alunoobj", aluno);
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(alunoid));
-		
 		return modelAndView;
 	}
 	
@@ -168,6 +190,7 @@ public class PessoaController {
 		
 	     ModelAndView modelAndView =  new ModelAndView("cadastro/telefones");
 	     modelAndView.addObject("alunoobj", aluno);
+	     modelAndView.addObject("cursoobj", aluno.getCurso().getNome());
 	     modelAndView.addObject("telefones", telefoneRepository.getTelefones(aluno.getId()));
 		 return modelAndView;
 	}

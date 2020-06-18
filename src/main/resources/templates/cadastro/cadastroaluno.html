@@ -19,7 +19,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-user-plus"></i> Colégio Fernandez</a>
+    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Colégio Fernandez</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -35,7 +35,7 @@
       </ul>
     </header>
     <!-- Sidebar menu-->
-    <<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
         <div>
@@ -102,6 +102,13 @@
                     <select class="form-control"  th:field="*{status}" id="status">
                       <option th:each="s : ${T(com.projetoescolar.model.Status).values()}" 
                       th:value="${s.valor}" th:text="${s.nome}"/>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group col-md-4">
+                    <label for="curso">Curso:</label>
+                    <select class="form-control"  th:field="*{curso}" id="curso">
+                    <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
                     </select>
                   </div>
               

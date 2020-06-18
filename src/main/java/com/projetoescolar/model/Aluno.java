@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -42,6 +43,17 @@ public class Aluno implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	
+	@ManyToOne
+	private Cursos curso;
+	
+	public void setCurso(Cursos curso) {
+		this.curso = curso;
+	}
+	
+	public Cursos getCurso() {
+		return curso;
+	}
 	
 	public void setStatus(Status status) {
 		this.status = status;
