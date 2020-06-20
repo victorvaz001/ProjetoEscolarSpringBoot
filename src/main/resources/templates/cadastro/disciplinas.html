@@ -55,12 +55,12 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1>Telefones</h1>
+          <h1>Disiciplinas</h1>
           <p></p>
         </div>
            <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><a href="/acessosistema"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="breadcrumb-item">Detalhes do aluno</li>
+          <li class="breadcrumb-item">Disciplinas do aluno / Curso</li>
           <li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
         </ul>
       </div>
@@ -91,40 +91,52 @@
             	</div>
 				   <hr/>
              	   <div class="tile-body">
-             	     <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone</i></h3>
-              <form class="row"  th:action="@{/addfonePessoa/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
+             	     <h3 class="tile-title"><i class="fa fa-graduation-cap 3x"> Adicionar disiciplina</i></h3>
+              <form class="row" th:object="${alunoobj}"  th:action="@{/adddisciplinaaluno/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
+                
                 <div class="form-group col-md-3">
-                  <label for="numeroaluno" class="control-label">Numero:</label>
-                  <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" id="numero">
+                  <label for="numeroaluno" class="control-label">Nome:</label>
+                  <input class="form-control" type="text" placeholder="Informe a disciplina" name="nome" id="nome" >
                 </div>
                 
                  <div class="form-group col-md-4">
-                  <label for="numeroaluno" class="control-label">Tipo:</label>
-                  <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" id="tipo">
+                  <label for="numeroaluno" class="control-label">Nota 1:</label>
+                  <input class="form-control" type="number" placeholder="Nota do primeira prova" name="nota1" id="nota1" >
                 </div> 
+                
+                   <div class="form-group col-md-4">
+                  <label for="nota2" class="control-label">Nota 2:</label>
+                  <input class="form-control" type="number" placeholder="Nota do segunda prova" name="nota2" id="nota2" >
+                </div>
                   
                 <div class="form-group col-md-5 align-self-end" th:each="aluno : ${alunoobj}">
-                  <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Salvar </button>
-                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Listar de alunos</a>
-                  <a class="btn btn-secondary" th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" data-toggle="tooltip" data-original-title="Detalhes do aluno"><i class="fa fa-times-circle"></i>Voltar</a>
+                  <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar disciplina"><i class="fa fa-floppy-o"></i>Salvar </button>
+                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Mostrar todos os alunos"><i class="fa fa-users"></i>Alunos</a>
+                  <a class="btn btn-secondary" th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" data-toggle="tooltip" data-original-title="Voltar aos detalhes do aluno"><i class="fa fa-times-circle"></i>Voltar</a>
          
              	 </div>
               </form>
             </div>
                 
-                  <table class="table table-striped">
+                  <table class="table table-striped" th:object="${disciplinaobj}">
                     <thead>
                       <tr>
-                        <th>Número</th>
-                        <th>Tipo:</th>
-                        <th>Deletar:</th>
+						<th>Nome:</th>
+						<th>Nota 1º bibemestre</th>
+						<th>Nota 2º bibemestre</th>
+						<th>Media:</th>
+						<th>Status disciplina:</th>
+						<th>Excluir</th>
                       </tr>
                     </thead>
                     <tbody>
-                     <tr th:each="fone : ${telefones}">
-		                  <td th:text="${fone.numero}"></td>
-		                  <td th:text="${fone.tipo}"></td>
-		                  <td><a class="btn btn-danger" th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}"  data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+                      <tr th:each="disciplina : ${disciplinas}">
+						 <td th:text="${disciplina.nome}"></td>
+						  <td th:text="${disciplina.nota1}"></td>
+						  <td th:text="${disciplina.nota2}"></td>
+						  <td th:text="${disciplina.media}"></td>	
+						  <td th:text="${disciplina.statusDisciplinaAluno}"></td>
+		                  <td><a class="btn btn-danger" th:href="@{/removerdisciplina/{iddiciplina}(iddiciplina=${disciplina.id})}" data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                		 </tr>
                     </tbody>
                   </table>
@@ -166,17 +178,30 @@
     
     	function validarCampos(){
 
-    		numero = document.getElementById('numero').value;
-    		tipo = document.getElementById('tipo').value;
+    		nome = document.getElementById('nome').value;
+    		nota1 = document.getElementById('nota1').value;
+    		nota2 = document.getElementById('nota2').value;
     		
-    		if(numero === ''){
-    			alert('Número deve ser informado');
-    			document.getElementById('numero').focus();    			
+    		if(nome === ''){
+    			alert('Nome da disciplina deve ser informado');
+    			document.getElementById('nome').focus();    			
     			return false;
     		}
-    		else if(tipo === ''){
-    			alert('Tipo de ser informado');
-    			document.getElementById('tipo').focus();
+    		else if(nota1 === ''){
+    			alert('A nota 1 deve ser informada');
+    			document.getElementById('nota1').focus();
+    			return false;
+    		} else if (nota2 === ''){
+    			alert('A nota 2 deve ser informada');
+    			document.getElementById('nota2').focus();
+    			return false;
+    		} else if (nota1 >= 100){
+    			alert('Nota 1  deve ser menor que 100 pontos');
+    			document.getElementById('nota1').focus();    			
+    			return false;
+    		}else if (nota2 >= 100){
+    			alert('Nota 2 deve ser menor que 100 pontos');
+    			document.getElementById('nota2').focus();    			
     			return false;
     		}
     		
@@ -186,6 +211,7 @@
     	}
     
     </script>
+    
     
 <script>
 var d = new Date();

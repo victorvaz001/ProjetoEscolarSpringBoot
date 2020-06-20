@@ -4,7 +4,8 @@ public enum Status {
 	
 	CURSANDO("Cursando"),
 	TRANCADO("Trancado"),
-	CANCELADO("Cancelado");
+	CANCELADO("Cancelado"),
+	CONCLUIDO("Concluido");
 	
 	private String nome;
 	private String valor;

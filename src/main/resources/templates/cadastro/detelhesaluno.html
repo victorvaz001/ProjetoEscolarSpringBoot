@@ -96,37 +96,22 @@
 							</div>
 						</div>
 						<div class="row invoice-info" th:each="aluno : ${alunoobj}">
-							<div class="col-4" >
+							<div class="col-5" >
 								Sobre:
 								<address>
-									<strong>Matricula: </strong></strong><span th:text="${aluno.id}"></span><br>
-								    <strong>Nome:</strong> </strong><span th:text="${aluno.nome}"></span>
+									<strong>Matricula: </strong><span th:text="${aluno.id}"></span><br>
+								    <strong>Nome:</strong> <span th:text="${aluno.nome}"></span>
 									<span th:text="${aluno.sobrenome}"></span><br>
-									<strong>Email: </strong></strong><span th:text="${aluno.email}"></span><br>
-									<strong>Curso:</strong> </strong><span th:text="${curso.nome}"></span><br>
-									<strong>Status:</strong><span th:text="${aluno.status}"><br>
+									<strong>Email: </strong><span th:text="${aluno.email}"></span><br>
+									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
+									<strong>Status:</strong><span th:text="${aluno.status}"></span><br>
 								
 								</address>
 								<a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
 								<a class="btn btn-success" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Alunos</a>
+								<a class="btn btn-dark" th:href="@{/disciplinas/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Lançar nota / Disiciplinas"><i class="fa fa-file-text-o"></i>disciplinas</a>
 								
-							</div>
-							
-							<div class="col-4">
-								To
-								<address>
 								
-									<strong>John Doe</strong><br>795 Folsom Ave, Suite 600<br>San
-									Francisco, CA 94107<br>Phone: (555) 539-1037<br>Email:
-									john.doe@example.com
-								</address>
-							</div>
-							<div class="col-4">
-								<b>Invoice #007612</b><br>
-								<br>
-								<b>Order ID:</b> 4F3S8J<br>
-								<b>Payment Due:</b> 2/22/2014<br>
-								<b>Account:</b> 968-34567
 							</div>
 						</div>
 				
@@ -138,31 +123,27 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>Qty</th>
-											<th>Product</th>
-											<th>Serial #</th>
-											<th>Description</th>
-											<th>Subtotal</th>
+											<th>Id:</th>
+											<th>Nome:</th>
+											<th>Nota 1º bibemestre</th>
+											<th>Nota 2º bibemestre</th>
+											<th>Media:</th>
+											<th>Status disciplina:</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>The Hunger Games</td>
-											<td>455-981-221</td>
-											<td>El snort testosterone trophy driving gloves handsome</td>
-											<td>$41.32</td>
-										</tr>
+					                    <tr th:each="disciplina : ${disciplinas}">
+					                     <td th:text="${disciplina.id}"></td>
+						                  <td th:text="${disciplina.nome}"></td>
+						                  <td th:text="${disciplina.nota1}"></td>
+						                  <td th:text="${disciplina.nota2}"></td>
+						                  <td th:text="${disciplina.media}"></td>	
+						                   <td th:text="${disciplina.statusDisciplinaAluno}"></td>
+			               		 	   </tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
-						  <div class="row d-print-none mt-2">
-               			 <div class="col-12 text-right">
-               			 
-               			  <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Salvar </button>
-                
-            		  </div>
 					</section>
 				</div>
 			</div>

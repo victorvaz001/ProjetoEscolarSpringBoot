@@ -44,6 +44,7 @@ public class Aluno implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
+	
 	@ManyToOne
 	private Cursos curso;
 	
@@ -77,6 +78,17 @@ public class Aluno implements Serializable {
 
 	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
+	
+	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
+	private List<Disciplina> disciplinas;
+	
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
 
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
