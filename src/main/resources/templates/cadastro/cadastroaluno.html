@@ -73,31 +73,33 @@
             	<span th:text = "${m}"> </span>
             	</div>
             <br/>
-              <form  action="salvaraluno" method="post" th:object="${alunoobj}">      
-                <div class="form-group">
+            
+              <form  action="salvaraluno" method="post" th:object="${alunoobj}" class="row">
+                    
+                <div class="form-group col-md-2">
                   <label class="control-label">Matricula:</label>
                   <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
                 </div>     
-                <div class="form-group">
+                <div class="form-group col-md-4">
                   <label class="control-label">Name:</label>
                   <input class="form-control" type="text" placeholder="Primeiro nome" name="nome"  th:field="*{nome}">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-6">
                   <label class="control-label">Sobrenome:</label>
                   <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" th:field="*{sobrenome}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
 	                  <label class="control-label">E-mail</label>
 	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email"  th:field="*{email}">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-6">
 	                  <label class="control-label">Idade:</label>
 	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-6">
                     <label for="status">Status:</label>
                     <select class="form-control"  th:field="*{status}" id="status">
                       <option th:each="s : ${T(com.projetoescolar.model.Status).values()}" 
@@ -105,21 +107,18 @@
                     </select>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="curso">Curso:</label>
-                    <select class="form-control"  th:field="*{curso}" id="curso">
+                  <div class="form-group col-md-6">
+                    <label for="cursos">Curso:</label>
+                    <select class="form-control" th:field="*{curso}" id="cursos">
                     <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
                     </select>
                   </div>
               
-                     <div class="form-group">
-              		<div class="row">
-	               		 <div class="col-md-8 col-md-offset-3">
-	                     <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>
-	                     <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip"  data-original-title="Voltar para pagina inicial"><i class="fa fa-list-alt"></i>Cancelar</a>
-                   </div>
-                </div>
-             </div>
+                     <div class="form-group col-md-6">
+		                     <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>
+		                     <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip"  data-original-title="Voltar para pagina inicial"><i class="fa fa-list-alt"></i>Cancelar</a>
+               			 </div>
+             		
               </form>
             </div>
           </div>

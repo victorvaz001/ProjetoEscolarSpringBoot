@@ -67,41 +67,35 @@
 
          <div class="row">
          
-         <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-            <div class="info">
-              <h4>Users</h4>
-              <p><b>5</b></p>
+         <div class="col-md-6 col-lg-4">
+          <div class="widget-small primary coloured-icon">
+          <a href="/listadeAlunos" data-toggle="tooltip" data-original-title="Total de alunos cadastrados" style="text-decoration: none;"><i class="icon fa fa-graduation-cap fa-3x"></i></a>
+            <div class="info" th:each="contagemAlunos : ${contAlunosobj}">
+              <h4><a href="/listadeAlunos" data-toggle="tooltip" data-original-title="Total de alunos cadastrados">Alunos</a></h4>
+              <p><a href="/listadeAlunos" data-original-title="Total de alunos cadastrados"><b><span th:text="${contagemAlunos}"> </span></b></a></p>
             </div>
           </div>
         </div>
         
-         <div class="col-md-6 col-lg-3">
-          <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-            <div class="info">
-              <h4>Likes</h4>
-              <p><b>25</b></p>
+         <div class="col-md-6 col-lg-4">
+          <div class="widget-small danger coloured-icon">
+          <a href="/listadeProfessores" data-toggle="tooltip" data-original-title="Total de professores cadastrados" style="text-decoration: none;"><i class="icon fa fa-user-circle-o 2x"></i></a>
+            <div class="info" th:each="contagemAprofessores : ${contProfessoresobj}">
+               <h4><a href="/listadeProfessores" data-toggle="tooltip" data-original-title="Total de professores cadastrados">Professores</a></h4>
+               <p><a href="/listadeProfessores" data-original-title="Total de Professores cadastrados"><b><span th:text="${contagemAprofessores}"> </span></b></a></p>
             </div>
           </div>
         </div>
         
-         <div class="col-md-6 col-lg-3">
-          <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+         <div class="col-md-6 col-lg-4">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-book fa-3x"></i>
             <div class="info">
-              <h4>Uploades</h4>
+              <h4>Biblioteca</h4>
               <p><b>10</b></p>
             </div>
           </div>
         </div>
-        
-           <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
-            <div class="info">
-              <h4>Stars</h4>
-              <p><b>500</b></p>
-            </div>
-          </div>
-        </div>
+
           </div>
           
            <div class="row">

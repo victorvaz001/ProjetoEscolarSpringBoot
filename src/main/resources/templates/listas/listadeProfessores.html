@@ -75,6 +75,29 @@
           <div class="tile">
             <div class="tile-body">
               <div class="table-responsive">
+              
+          	    <div class="alert alert-success alert-dismissible fade show" role="alert"  th:each="save : ${msgSave}">
+					  <span th:text = "${save}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de professores</a></strong> 
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+				</div>
+				
+				<div class="alert alert-warning alert-dismissible fade show" role="alert"  th:each="edit : ${msgEdit}">
+					  <span th:text = "${edit}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de professores</a></strong> 
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+				</div>
+				
+				  <div class="alert alert-danger alert-dismissible fade show" role="alert"  th:each="delete : ${msgDelete}">
+					 <span th:text = "${delete}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de professores</a></strong> 
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+				 </div>
+              
+              
                 <table class="table table-hover table-bordered" id="sampleTable">
                   
                   <thead style="text-align: center;">

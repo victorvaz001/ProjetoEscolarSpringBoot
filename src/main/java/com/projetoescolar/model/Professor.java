@@ -1,9 +1,12 @@
 package com.projetoescolar.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Professor {
@@ -21,6 +24,7 @@ public class Professor {
 	private String sexo;
 	
 	private Integer idade;
+	
 	
 	public String getSobrenome() {
 		return sobrenome;

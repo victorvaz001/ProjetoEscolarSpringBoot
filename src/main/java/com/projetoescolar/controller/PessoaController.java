@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projetoescolar.model.Aluno;
+import com.projetoescolar.model.Cursos;
 import com.projetoescolar.model.Disciplina;
 import com.projetoescolar.model.Professor;
 import com.projetoescolar.model.StatusDisciplinaAluno;
@@ -57,6 +58,12 @@ public class PessoaController {
 		andView.addObject("alunos", alunoIt);
 		andView.addObject("alunoobj", new Aluno());
 		
+		Long contAlunosobj = alunoRepository.count();
+		andView.addObject("contAlunosobj", contAlunosobj);
+		
+		 Long contProfessoresobj = professorRepository.count();
+		 andView.addObject("contProfessoresobj", contProfessoresobj);
+		
 		return andView;
 	}
 	
@@ -73,6 +80,17 @@ public class PessoaController {
 		 modelAndView.addObject("disciplinas", disciplinaRepository.getDisiciplina(idaluno));
 		 
 		 return modelAndView;
+	}
+	
+	@GetMapping("detalheprofessor/{idprofessor}")
+	public ModelAndView detalheProfessor(@PathVariable("idprofessor") Long idprofessor) {
+		
+		Optional<Professor> professor = professorRepository.findById(idprofessor);
+		ModelAndView modelAndView = new ModelAndView("detalhes/detalhesprofessor");
+		modelAndView.addObject("professorobj", professor.get());
+		
+		return modelAndView;
+		
 	}
 	
 	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
@@ -124,7 +142,7 @@ public class PessoaController {
 
 	//ao clicar em salvar, via botao do formulario / POST
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvaraluno")
-	public ModelAndView salvar(@Valid Aluno aluno, BindingResult bindingResult) {
+	public ModelAndView salvarAluno(@Valid Aluno aluno, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("cadastro/cadastroaluno");
@@ -142,33 +160,41 @@ public class PessoaController {
 			return modelAndView;
 		}
 		
+		ModelAndView andView = new ModelAndView("listas/listaAlunos");
+		
+		List<String> msgSave = new  ArrayList<>();
+		List<String> msgEdit = new  ArrayList<>();
+		
+		if(aluno.getId() == null) {
+			msgSave.add("Aluno salvo com sucesso!");
+			andView.addObject("msgSave", msgSave);
+			
+		}else {
+			msgEdit.add("Aluno editado com sucesso!");
+			andView.addObject("msgEdit", msgEdit);
+		}
+		
 		
 		alunoRepository.save(aluno);
-		ModelAndView andView = new ModelAndView("acesso/acessosistema");
+		Long contAlunosobj = alunoRepository.count();
+		Long contProfessoresobj = professorRepository.count();
+		
+		
 		Iterable<Aluno> alunoIt  = alunoRepository.findAll();
 		andView.addObject("alunos", alunoIt);
 		andView.addObject("alunoobj", new Aluno());
+		andView.addObject("contAlunosobj", contAlunosobj);
+		andView.addObject("contProfessoresobj", contProfessoresobj);
+		
+		
+		
 		
 		return andView;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="**/salvarprofessor")
-	public ModelAndView salvarProfessor(Professor professor) {
-		
-		professorRepository.save(professor);
-		
-		ModelAndView modelAndView = new ModelAndView("listas/listadeProfessores");
-		Iterable<Professor> professorIt = professorRepository.findAll();
-		modelAndView.addObject("professores", professorIt);
-		modelAndView.addObject("professorobj", new Professor());
-		
-		return modelAndView;
-		
-	}
-	
 	
 	@GetMapping("/editaraluno/{idaluno}")
-	public ModelAndView editar(@PathVariable("idaluno") Long idaluno) {
+	public ModelAndView editarAluno(@PathVariable("idaluno") Long idaluno) {
 		
 		 Optional<Aluno> aluno = alunoRepository.findById(idaluno);
 		 
@@ -177,6 +203,88 @@ public class PessoaController {
 		 modelAndView.addObject("cursos", cursoRepository.findAll());
 		
 		 return modelAndView;
+	}
+	
+	@GetMapping("/removeraluno/{idaluno}")
+	public ModelAndView removerAluno(@PathVariable("idaluno") Long idaluno) {
+		
+		 alunoRepository.deleteById(idaluno);
+		
+	     ModelAndView modelAndView =  new ModelAndView("listas/listaAlunos");
+		 modelAndView.addObject("alunos", alunoRepository.findAll());
+		 modelAndView.addObject("alunoobj", new Aluno());
+		 
+		 Long contAlunosobj = alunoRepository.count();
+		 modelAndView.addObject("contAlunosobj", contAlunosobj);
+		 
+			List<String> msgDelete = new ArrayList<String>();
+		 
+			msgDelete.add("Professor removido com sucesso!");
+			modelAndView.addObject("msgDelete", msgDelete);
+		 
+		 return modelAndView;
+	}
+	
+	@GetMapping("/removerprofessor/{idprofessor}")
+	public ModelAndView removerProfessor(@PathVariable("idprofessor") Long idprofessor) {
+		
+		professorRepository.deleteById(idprofessor);
+		
+		
+		List<String> msgDelete = new ArrayList<String>();
+		
+		ModelAndView modelAndView = new ModelAndView("listas/listadeProfessores");
+		modelAndView.addObject("professores", professorRepository.findAll());
+		modelAndView.addObject("professorobj", new Professor());
+		
+		msgDelete.add("Professor removido com sucesso!");
+		modelAndView.addObject("msgDelete", msgDelete);
+		
+		return modelAndView;
+		
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.POST, value="**/salvarprofessor")
+	public ModelAndView salvarProfessor(Professor professor) {
+		
+		List<String> msgSave = new ArrayList<String>();
+		List<String> msgEdit = new ArrayList<String>();
+		
+		ModelAndView modelAndView = new ModelAndView("listas/listadeProfessores");
+		
+		
+		if(professor.getId() == null) {
+			msgSave.add("Professor salvo com sucesso!");
+			modelAndView.addObject("msgSave", msgSave);
+			
+		}else {
+			msgEdit.add("Professor editado com sucesso!");
+			modelAndView.addObject("msgEdit", msgEdit);
+		}
+
+		professorRepository.save(professor);
+		Iterable<Professor> professorIt = professorRepository.findAll();
+		modelAndView.addObject("professores", professorIt);
+		modelAndView.addObject("cursos", cursoRepository.findAll());
+		modelAndView.addObject("professorobj", new Professor());
+		
+	
+		return modelAndView;
+		
+	}
+	
+	
+	@GetMapping("/editarprofessor/{idprofessor}")
+	public ModelAndView editarProfesor(@PathVariable("idprofessor") Long idprofessor) {
+		
+		Optional<Professor> professor = professorRepository.findById(idprofessor);
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroprofessor");
+		modelAndView.addObject("professorobj", professor.get());
+		
+		
+		return modelAndView;
+		
 	}
 	
 	
@@ -236,17 +344,6 @@ public class PessoaController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/removeraluno/{idaluno}")
-	public ModelAndView removerPessoa(@PathVariable("idaluno") Long idaluno) {
-		
-		 alunoRepository.deleteById(idaluno);
-		
-	     ModelAndView modelAndView =  new ModelAndView("acesso/acessosistema");
-		 modelAndView.addObject("alunos", alunoRepository.findAll());
-		 modelAndView.addObject("alunoobj", new Aluno());
-		 
-		 return modelAndView;
-	}
 	
 	@GetMapping("/removertelefone/{idtelefone}")
 	public ModelAndView removerTelefone(@PathVariable("idtelefone") Long idtelefone) {
