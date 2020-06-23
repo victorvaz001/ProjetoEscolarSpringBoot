@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     
-    <title>Data Table - Vali Admin</title>
+    <title>Cadastro de disciplinas</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,9 +86,9 @@
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
-                	<div th:each="m : ${msg}">
-            	<span th:text = "${m}"> </span>
-            	</div>
+                	<div th:each="m : ${msg}" class="alert alert-success" role="alert">
+            		<span th:text = "${m}"> </span>
+            		</div>
 				   <hr/>
              	   <div class="tile-body">
              	     <h3 class="tile-title"><i class="fa fa-graduation-cap 3x"> Adicionar disiciplina</i></h3>
@@ -136,7 +136,7 @@
 						  <td th:text="${disciplina.nota2}"></td>
 						  <td th:text="${disciplina.media}"></td>	
 						  <td th:text="${disciplina.statusDisciplinaAluno}"></td>
-		                  <td><a class="btn btn-danger" th:href="@{/removerdisciplina/{iddiciplina}(iddiciplina=${disciplina.id})}" data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+		                  <td><a class="btn btn-danger" th:href="@{/removerdisciplina/{iddiciplina}(iddiciplina=${disciplina.id})}" data-toggle="tooltip"  data-original-title="Deletar disciplina" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                		 </tr>
                     </tbody>
                   </table>

@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.projetoescolar.model.Aluno;
 import com.projetoescolar.model.Disciplina;
+import com.projetoescolar.model.Professor;
 import com.projetoescolar.model.StatusDisciplinaAluno;
 import com.projetoescolar.model.Telefone;
 import com.projetoescolar.repository.AlunoRepository;
 import com.projetoescolar.repository.CursoRepository;
 import com.projetoescolar.repository.DisciplinaRepository;
+import com.projetoescolar.repository.ProfessorRepository;
 import com.projetoescolar.repository.TelefoneRepository;
 
 @Controller
@@ -40,6 +42,9 @@ public class PessoaController {
 	
 	@Autowired
 	private DisciplinaRepository disciplinaRepository;
+	
+	@Autowired
+	private ProfessorRepository professorRepository;
 	
 	private Double total = 0.0;
 
@@ -80,8 +85,44 @@ public class PessoaController {
 		 return modelAndView;
 	}
 	
+	//Ao clicar no link(Cad.Aluno) /acessosistema no index
+	@RequestMapping(method = RequestMethod.GET, value = "/listadeAlunos")
+	public ModelAndView inicioListaAlunos() {
+		
+		ModelAndView andView = new ModelAndView("listas/listaAlunos");
+		Iterable<Aluno> alunoIt  = alunoRepository.findAll();
+		andView.addObject("alunos", alunoIt);
+		
+		return andView;
+	}
+	
+	
+	//Ao clicar no link(Cad.Aluno) /acessosistema no index
+	@RequestMapping(method = RequestMethod.GET, value = "/listadeProfessores")
+	public ModelAndView inicioListaProfessores() {
+		
+		ModelAndView andView = new ModelAndView("listas/listadeProfessores");
+		Iterable<Professor> professorIt  = professorRepository.findAll();
+		andView.addObject("professores", professorIt);
+		andView.addObject("professorobj", new Professor());
+		
+		return andView;
+	}
+	
 
-	//ao clicar em salvar, via botao do formulario
+	
+	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
+	@RequestMapping(method = RequestMethod.GET, value = "/cadastroprofessor")
+	public ModelAndView inicioCadastroProfessor() {
+		
+		 ModelAndView modelAndView =  new ModelAndView("cadastro/cadastroprofessor");
+		 modelAndView.addObject("professorobj", new Professor());
+		 //modelAndView.addObject("cursos", cursoRepository.findAll());
+		 return modelAndView;
+	}
+	
+
+	//ao clicar em salvar, via botao do formulario / POST
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvaraluno")
 	public ModelAndView salvar(@Valid Aluno aluno, BindingResult bindingResult) {
 		
@@ -109,6 +150,20 @@ public class PessoaController {
 		andView.addObject("alunoobj", new Aluno());
 		
 		return andView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="**/salvarprofessor")
+	public ModelAndView salvarProfessor(Professor professor) {
+		
+		professorRepository.save(professor);
+		
+		ModelAndView modelAndView = new ModelAndView("listas/listadeProfessores");
+		Iterable<Professor> professorIt = professorRepository.findAll();
+		modelAndView.addObject("professores", professorIt);
+		modelAndView.addObject("professorobj", new Professor());
+		
+		return modelAndView;
+		
 	}
 	
 	

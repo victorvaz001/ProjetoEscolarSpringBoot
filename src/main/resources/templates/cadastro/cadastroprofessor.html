@@ -54,18 +54,18 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-graduation-cap"></i> Cadastro de alunos</h1>
+          <h1><i class="fa fa-user-circle-o"></i> Cadastro de professores</h1>
          
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><a href="/acessosistema"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="breadcrumb-item">Salvar aluno</li>
+          <li class="breadcrumb-item">Salvar professor</li>
           <li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
         </ul>
       </div>
     	<div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">Alunos</h3>
+            <h3 class="tile-title">Professores</h3>
             <div class="tile-body">
             
             <br/>
@@ -73,58 +73,59 @@
             	<span th:text = "${m}"> </span>
             	</div>
             <br/>
-              <form  action="salvaraluno" method="post" th:object="${alunoobj}">      
+            <form action="salvarprofessor" method="post" th:object="${professorobj}">
+            
+              <div class="form-group">
+                  <label class="control-label">Id:</label>
+                  <input class="form-control" type="text" name="id"  readonly="readonly">
+                </div> 
+            
                 <div class="form-group">
-                  <label class="control-label">Matricula:</label>
-                  <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
-                </div>     
-                <div class="form-group">
-                  <label class="control-label">Name:</label>
-                  <input class="form-control" type="text" placeholder="Primeiro nome" name="nome"  th:field="*{nome}">
+                  <label class="control-label">Nome</label>
+                  <input class="form-control" type="text" placeholder="Entre com o primeiro nome" id="nome" name="nome" required="required">
                 </div>
                 
                 <div class="form-group">
-                  <label class="control-label">Sobrenome:</label>
-                  <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" th:field="*{sobrenome}">
-                </div>
-                <div class="form-group">
-	                  <label class="control-label">E-mail</label>
-	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email"  th:field="*{email}">
+                  <label class="control-label">Sobrenome</label>
+                  <input class="form-control" type="text" placeholder="Entre com o primeiro nome" id="sobrenome" name="sobrenome" required="required">
                 </div>
                 
                 <div class="form-group">
-	                  <label class="control-label">Idade:</label>
-	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}">
+                  <label class="control-label">Email</label>
+                  <input class="form-control" type="email" placeholder="Informe o E-mail" id="email" name="email" required="required" >
                 </div>
-                
                 <div class="form-group">
-                    <label for="status">Status:</label>
-                    <select class="form-control"  th:field="*{status}" id="status">
-                      <option th:each="s : ${T(com.projetoescolar.model.Status).values()}" 
-                      th:value="${s.valor}" th:text="${s.nome}"/>
+                  <label class="control-label">Idade</label>
+                  <input class="form-control" type="number" placeholder="Informe sua idade" id="idade" name="idade" required="required">
+                </div>
+               <div class="form-group">
+                    <label for="sexo">Sexo</label>
+                    <select class="form-control" th:field="*{sexo}">
+                      <option value="" disabled selected>--[Selecione]--</option>
+                      <option value="MASCULINO" th:text="Masculino"/>
+                      <option value="FEMININO"  th:text="Feminino"/> 
                     </select>
                   </div>
-                  
-                  <div class="form-group">
-                    <label for="curso">Curso:</label>
-                    <select class="form-control"  th:field="*{curso}" id="curso">
-                    <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
-                    </select>
-                  </div>
-              
-                     <div class="form-group">
-              		<div class="row">
-	               		 <div class="col-md-8 col-md-offset-3">
-	                     <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>
-	                     <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip"  data-original-title="Voltar para pagina inicial"><i class="fa fa-list-alt"></i>Cancelar</a>
-                   </div>
-                </div>
-             </div>
-              </form>
+
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-3">
+									<button class="btn btn-success" type="submit"
+										data-toggle="tooltip" data-original-title="Salvar novo aluno">
+										<i class="fa fa-floppy-o"></i>Salvar
+									</button>
+									<a class="btn btn-info" href="/acessosistema"
+										data-toggle="tooltip"
+										data-original-title="Voltar para pagina inicial"><i
+										class="fa fa-list-alt"></i>Cancelar</a>
+								</div>
+							</div>
+						</div>
+			</form>
             </div>
           </div>
         </div>
-          
+            
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>

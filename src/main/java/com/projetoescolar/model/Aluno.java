@@ -48,6 +48,13 @@ public class Aluno implements Serializable {
 	@ManyToOne
 	private Cursos curso;
 	
+	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
+	private List<Telefone> telefones;
+	
+	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
+	private List<Disciplina> disciplinas;
+	
+	
 	public void setCurso(Cursos curso) {
 		this.curso = curso;
 	}
@@ -76,11 +83,6 @@ public class Aluno implements Serializable {
 		return idade;
 	}
 
-	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
-	private List<Telefone> telefones;
-	
-	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
-	private List<Disciplina> disciplinas;
 	
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;

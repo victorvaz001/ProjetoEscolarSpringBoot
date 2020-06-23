@@ -86,9 +86,9 @@
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
-                	<div th:each="m : ${msg}">
-            	<span th:text = "${m}"> </span>
-            	</div>
+                	<div th:each="m : ${msg}" class="alert alert-success" role="alert">
+            		<span th:text = "${m}"> </span>
+            		</div>
 				   <hr/>
              	   <div class="tile-body">
              	     <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone</i></h3>

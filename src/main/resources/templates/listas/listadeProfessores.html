@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="br" 
-	 xmlns="https://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	class="">
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     
-    <title>Cadastro de alunos</title>
+    <title>Lista de professores</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,8 +19,8 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Colégio Fernandez</a>
-      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <header class="app-header"><a class="app-header__logo" href="index.html"><i class="fa fa-graduation-cap"></i> Colégio Fernandez</a>
+      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar" ></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
 
@@ -29,13 +29,13 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Sair</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out fa-lg"></i> Sair</a></li>
           </ul>
         </li>
       </ul>
     </header>
     <!-- Sidebar menu-->
-    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"  ></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
         <div>
@@ -46,87 +46,68 @@
       <ul class="app-menu">
         <li><a class="app-menu__item" href="/acessosistema"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Inicio</span></a></li>
        <li><a class="app-menu__item" href="/cadastroaluno"><i class="app-menu__icon fa fa-graduation-cap"></i><span class="app-menu__label">Alunos</span></a></li>
-	   <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Professores</span></a></li>
+	   <li><a class="app-menu__item" href="/cadastroprofessor"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Professores</span></a></li>
 		<li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Biblioteca</span></a></li>
         <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i><span class="app-menu__label">Sair</span></a></li>
       </ul>
     </aside>
     <main class="app-content">
+
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-graduation-cap"></i> Cadastro de alunos</h1>
+          <h1><i class="fa fa-user-circle-o"></i> Lista de Professores </h1>
+         
          
         </div>
         <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><a href="/acessosistema"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="breadcrumb-item">Salvar aluno</li>
-          <li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="/acessosistema">Lista de Professores</a></li>
         </ul>
       </div>
-    	<div class="col-md-12">
+                <div class="form-group col-md-5 align-self-end">
+                   <a class="btn btn-primary" type="submit" href="/cadastroprofessor" data-toggle="tooltip"  data-original-title="Cadastrar novo professor"><i class="fa fa-user-plus"></i>Novo professor</a>
+                   <a class="btn btn-danger" href="#" data-toggle="tooltip"  data-original-title="Gerar PDF"><i class="fa fa-file-pdf-o"></i>Gerar PDF</a>
+                </div>
+         <br/>
+         <br/>
+         <div class="row">
+        <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">Alunos</h3>
             <div class="tile-body">
-            
-            <br/>
-            	<div th:each="m : ${msg}">
-            	<span th:text = "${m}"> </span>
-            	</div>
-            <br/>
-              <form  action="salvaraluno" method="post" th:object="${alunoobj}">      
-                <div class="form-group">
-                  <label class="control-label">Matricula:</label>
-                  <input class="form-control" type="text" name="id" required="required" readonly="readonly" th:field="*{id}">
-                </div>     
-                <div class="form-group">
-                  <label class="control-label">Name:</label>
-                  <input class="form-control" type="text" placeholder="Primeiro nome" name="nome"  th:field="*{nome}">
-                </div>
-                
-                <div class="form-group">
-                  <label class="control-label">Sobrenome:</label>
-                  <input class="form-control" type="text" placeholder="Informe o sobrenome" name="sobrenome" th:field="*{sobrenome}">
-                </div>
-                <div class="form-group">
-	                  <label class="control-label">E-mail</label>
-	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email"  th:field="*{email}">
-                </div>
-                
-                <div class="form-group">
-	                  <label class="control-label">Idade:</label>
-	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}">
-                </div>
-                
-                <div class="form-group">
-                    <label for="status">Status:</label>
-                    <select class="form-control"  th:field="*{status}" id="status">
-                      <option th:each="s : ${T(com.projetoescolar.model.Status).values()}" 
-                      th:value="${s.valor}" th:text="${s.nome}"/>
-                    </select>
-                  </div>
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="sampleTable">
                   
-                  <div class="form-group">
-                    <label for="curso">Curso:</label>
-                    <select class="form-control"  th:field="*{curso}" id="curso">
-                    <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
-                    </select>
-                  </div>
-              
-                     <div class="form-group">
-              		<div class="row">
-	               		 <div class="col-md-8 col-md-offset-3">
-	                     <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>
-	                     <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip"  data-original-title="Voltar para pagina inicial"><i class="fa fa-list-alt"></i>Cancelar</a>
-                   </div>
-                </div>
-             </div>
-              </form>
+                  <thead style="text-align: center;">
+                    <tr>
+                   	  <th>Matricula</th>
+                      <th>Nome</th>
+                      <th>Sobrenome</th>
+                      <th>Email</th>
+                      <th >Editar</th>
+                      <th >Deltar</th>
+                      <th >Detalhes</th>
+                    </tr>
+                  </thead>
+                  <tbody style="text-align: center;">
+                    <tr th:each="professor : ${professores}">
+                      <td th:text= "${professor.id}"></td>
+                      <td th:text= "${professor.nome}"> </td>
+                      <td th:text="${professor.sobrenome}"> </td>
+                      <td th:text=${professor.email}></td>
+                      <td><a class="btn btn-warning" th:href="@{/editarprofessor/{idprofessor}(idprofessor=${professor.id})}"  data-toggle="tooltip"  data-original-title="Editar professor"><span class="fa fa-pencil-square-o"></span></a></td>
+                      <td><a class="btn btn-danger" th:href="@{/removerprofessor/{idprofessor}(idprofessor=${professor.id})}"  data-toggle="tooltip"  data-original-title="Deletar professor" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+                   	  <td><a class="btn btn-info" th:href="@{/detalheprofessor/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Detalhes do professor"><i class="fa fa-info-circle"></i>Info</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+          </div>
+          </div>
           
     </main>
-    <!-- Essential javascripts for application to work-->
+       <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="/bootstrap/js/popper.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -165,5 +146,7 @@
       	ga('send', 'pageview');
       }
     </script>
+	
+
   </body>
 </html>

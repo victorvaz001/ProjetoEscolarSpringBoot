@@ -2,6 +2,8 @@
 <html lang="en" xmlns="https://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	
 <head>
 
 <title>Detalhes do aluno</title>
@@ -18,7 +20,7 @@
 
 
 </head>
-<body class="app sidebar-mini">
+<body class="app sidebar-mini" >
 	<!-- Navbar-->
 	<header class="app-header">
 		<a class="app-header__logo" href="index.html"><i
@@ -96,12 +98,13 @@
 							</div>
 						</div>
 						<div class="row invoice-info" th:each="aluno : ${alunoobj}">
-							<div class="col-5" >
+							<div class="col-6" >
 								Sobre:
 								<address>
 									<strong>Matricula: </strong><span th:text="${aluno.id}"></span><br>
 								    <strong>Nome:</strong> <span th:text="${aluno.nome}"></span>
 									<span th:text="${aluno.sobrenome}"></span><br>
+									<strong>Idade: </strong><span th:text="${aluno.idade}"></span><br>
 									<strong>Email: </strong><span th:text="${aluno.email}"></span><br>
 									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
 									<strong>Status:</strong><span th:text="${aluno.status}"></span><br>
@@ -109,8 +112,7 @@
 								</address>
 								<a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
 								<a class="btn btn-success" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Alunos</a>
-								<a class="btn btn-dark" th:href="@{/disciplinas/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Lançar nota / Disiciplinas"><i class="fa fa-file-text-o"></i>disciplinas</a>
-								
+								<a class="btn btn-dark" th:href="@{/disciplinas/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Lançar nota / Disiciplinas"><i class="fa fa-clipboard"></i>Add.disciplinas</a>
 								
 							</div>
 						</div>
@@ -120,6 +122,10 @@
 						<div class="row">
 						
 							<div class="col-12 table-responsive">
+								<h4 class="page-header">
+									<i class="fa fa-clipboard"></i> Disciplinas
+									
+								</h4>
 								<table class="table table-striped">
 									<thead>
 										<tr>
@@ -205,6 +211,8 @@
 	<script>
 var d = new Date();
 document.getElementById("demo").innerHTML = d.toDateString();
+
+
 </script>
 
 </body>
