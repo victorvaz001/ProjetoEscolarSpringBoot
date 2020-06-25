@@ -138,6 +138,14 @@
                   <label class="control-label">Estado</label>
                   <input class="form-control" type="text" placeholder="Informe sua idade" id="estado" name="estado" required="required" th:field="*{estado}">
                 </div>
+                
+                  <div class="form-group col-md-6">
+                    <label for="sexo">Sexo</label>
+                    <select class="form-control" th:field="*{sexo}">
+                      <option value="MASCULINO" th:text="Masculino"/>
+                      <option value="FEMININO"  th:text="Feminino"/> 
+                    </select>
+                  </div>
               
                      <div class="form-group col-md-7">
 		                     <button class="btn btn-success" type="submit" data-toggle="tooltip"  data-original-title="Salvar novo aluno"><i class="fa fa-floppy-o"></i>Salvar</button>

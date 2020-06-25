@@ -94,22 +94,33 @@
              	     <h3 class="tile-title"><i class="fa fa-graduation-cap 3x"> Adicionar disiciplina</i></h3>
               <form class="row" th:object="${alunoobj}"  th:action="@{/adddisciplinaaluno/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
                 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                   <label for="numeroaluno" class="control-label">Nome:</label>
                   <input class="form-control" type="text" placeholder="Informe a disciplina" name="nome" id="nome" >
                 </div>
                 
-                 <div class="form-group col-md-4">
+                 <div class="form-group col-md-6">
                   <label for="numeroaluno" class="control-label">Nota 1:</label>
                   <input class="form-control" type="number" placeholder="Nota do primeira prova" name="nota1" id="nota1" >
                 </div> 
                 
-                   <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="nota2" class="control-label">Nota 2:</label>
                   <input class="form-control" type="number" placeholder="Nota do segunda prova" name="nota2" id="nota2" >
                 </div>
+                
+                    
+                <div class="form-group col-md-6">
+                  <label for="nota2" class="control-label">Nota de trabalho:</label>
+                  <input class="form-control" type="number" placeholder="Nota de trabalhos" name="notaTrabalho" id="notaTrabalho" >
+                </div>
+                
+                <div class="form-group col-md-6">
+                  <label for="nota2" class="control-label">Nota de exercicio:</label>
+                  <input class="form-control" type="number" placeholder="Nota de exercicios" name="notaExercicioSala" id="notaExercicioSala" >
+                </div>
                   
-                <div class="form-group col-md-5 align-self-end" th:each="aluno : ${alunoobj}">
+                <div class="form-group col-md-12 align-self-end" th:each="aluno : ${alunoobj}">
                   <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar disciplina"><i class="fa fa-floppy-o"></i>Salvar </button>
                   <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Mostrar todos os alunos"><i class="fa fa-users"></i>Alunos</a>
                   <a class="btn btn-secondary" th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" data-toggle="tooltip" data-original-title="Voltar aos detalhes do aluno"><i class="fa fa-times-circle"></i>Voltar</a>
@@ -124,6 +135,8 @@
 						<th>Nome:</th>
 						<th>Nota 1º bibemestre</th>
 						<th>Nota 2º bibemestre</th>
+						<th>Nota de trabalho</th>
+						<th>Nota de exercicios</th>
 						<th>Media:</th>
 						<th>Status disciplina:</th>
 						<th>Excluir</th>
@@ -134,7 +147,9 @@
 						 <td th:text="${disciplina.nome}"></td>
 						  <td th:text="${disciplina.nota1}"></td>
 						  <td th:text="${disciplina.nota2}"></td>
-						  <td th:text="${disciplina.media}"></td>	
+						  <td th:text="${disciplina.notaTrabalho}"></td>
+						  <td th:text="${disciplina.notaExercicioSala}"></td>
+						  <td th:text="${disciplina.media}"></td>
 						  <td th:text="${disciplina.statusDisciplinaAluno}"></td>
 		                  <td><a class="btn btn-danger" th:href="@{/removerdisciplina/{iddiciplina}(iddiciplina=${disciplina.id})}" data-toggle="tooltip"  data-original-title="Deletar disciplina" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                		 </tr>
@@ -176,7 +191,7 @@
    
   
     <script type="text/javascript">
-    
+   
     	function validarCampos(){
 
     		nome = document.getElementById('nome').value;
@@ -188,6 +203,7 @@
     			document.getElementById('nome').focus();    			
     			return false;
     		}
+    		
     		else if(nota1 === ''){
     			alert('A nota 1 deve ser informada');
     			document.getElementById('nota1').focus();
@@ -200,7 +216,9 @@
     			alert('Nota 1  deve ser menor que 100 pontos');
     			document.getElementById('nota1').focus();    			
     			return false;
-    		}else if (nota2 >= 100){
+    		} 
+    		
+    		else if (nota2 >= 100){
     			alert('Nota 2 deve ser menor que 100 pontos');
     			document.getElementById('nota2').focus();    			
     			return false;
@@ -210,7 +228,7 @@
     		
     		
     	}
-    
+       
     </script>
     
     

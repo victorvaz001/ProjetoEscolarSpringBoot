@@ -471,9 +471,31 @@ public class PessoaController {
 		
 		media = total / 2;
 		
-		
-
-			if (media >= 30.0 || media <= 0.0) {
+		if(disiciplina.getNotaExercicioSala() == null|| disiciplina.getNotaTrabalho() == null) {
+			result = StatusDisciplinaAluno.EM_AVALIACAO;
+			
+			ModelAndView modelAndView = new ModelAndView("cadastro/disciplinas");
+			
+			disiciplina.setTotal(total);
+			disiciplina.setMedia(media);
+			
+			disiciplina.setStatusDisciplinaAluno(result);
+			
+			disciplinaRepository.save(disiciplina);
+			msg.add("Disciplina cadastrada com sucesso!");
+			modelAndView.addObject("msg", msg);
+			
+			disiciplina.setAluno(aluno);
+			
+			modelAndView.addObject("alunoobj", aluno);
+			modelAndView.addObject("disciplinas", disciplinaRepository.getDisiciplina(alunoid));
+			
+			Long contCursos = cursoRepository.count();
+			System.out.println("Total de cursos disponiveis = " + contCursos);
+			
+			return modelAndView;
+		} 
+		else if (media >= 30.0 || media <= 0.0) {
 				if (media != 0.0) {
 					if (media >= 50.00) {
 						result = StatusDisciplinaAluno.APROVADO;

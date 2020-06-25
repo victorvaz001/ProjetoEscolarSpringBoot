@@ -99,17 +99,18 @@
              	   <div class="tile-body">
              	     <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone do Professor</i></h3>
               <form class="row"  th:action="@{/addfoneProfessor/{professorid}(professorid=${professorobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
+                
                 <div class="form-group col-md-3">
                   <label for="numeroaluno" class="control-label">Numero:</label>
                   <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" id="numero">
                 </div>
                 
-                 <div class="form-group col-md-4">
+                 <div class="form-group col-md-3">
                   <label for="numeroaluno" class="control-label">Tipo:</label>
                   <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" id="tipo">
                 </div> 
                   
-                <div class="form-group col-md-5 align-self-end" th:each="professor : ${professorobj}">
+                <div class="form-group col-md-6 align-self-end" th:each="professor : ${professorobj}">
                   <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Salvar </button>
                   <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Listar de professores</a>
                    <a class="btn btn-secondary" th:href="@{/detalheprofessor/{idprofessor}(idprofessor=${professor.id})}" data-toggle="tooltip" data-original-title="Detalhes do professor"><i class="fa fa-times-circle"></i>Voltar</a>

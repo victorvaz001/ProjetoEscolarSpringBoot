@@ -106,6 +106,7 @@
 									<span th:text="${professor.sobrenome}"></span><br>
 									<strong>Idade: </strong><span th:text="${professor.idade}"></span><br>
 									<strong>Email: </strong><span th:text="${professor.email}"></span><br>
+									<strong>Sexo:</strong><span th:text="${professor.sexo}"></span><br>
 								
 								</address>
 								<a class="btn btn-info" th:href="@{/telefonesProf/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>

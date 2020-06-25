@@ -22,8 +22,6 @@ public class Disciplina {
 	@NotNull(message = "O nome não pode ser nulo")
 	private String nome;
 	
-	
-	
 	private Double nota1;
 	
 	
@@ -41,6 +39,27 @@ public class Disciplina {
 	
 	@Enumerated(value = EnumType.STRING)
 	private StatusDisciplinaAluno  statusDisciplinaAluno;
+	
+	private Double notaTrabalho;
+	
+	private Double notaExercicioSala;
+	
+	public Double getNotaExercicioSala() {
+		return notaExercicioSala;
+	}
+	
+	public void setNotaExercicioSala(Double notaExercicioSala) {
+		this.notaExercicioSala = notaExercicioSala;
+	}
+	
+	public void setNotaTrabalho(Double notaTrabalho) {
+		this.notaTrabalho = notaTrabalho;
+	}
+	
+	public Double getNotaTrabalho() {
+		return notaTrabalho;
+	}
+	
 	
 	public void setMedia(Double media) {
 		this.media = media;

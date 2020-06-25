@@ -7,6 +7,7 @@ public enum Status {
 	CANCELADO("Cancelado"),
 	CONCLUIDO("Concluido");
 	
+	
 	private String nome;
 	private String valor;
 	

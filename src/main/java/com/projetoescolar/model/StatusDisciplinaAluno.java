@@ -5,7 +5,8 @@ public enum StatusDisciplinaAluno {
 	APROVADO("Aprovado"),
 	REPROVADO("Reprovado"),
 	RECUPERAÇÃO("Recuperacao"),
-	SEGUNDA_CHAMADA("Segunda-Chamada");
+	SEGUNDA_CHAMADA("Segunda-Chamada"),
+	EM_AVALIACAO("Em-Avaliacao");
 	
 	
 	private String nome;

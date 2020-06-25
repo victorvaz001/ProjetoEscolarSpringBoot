@@ -108,6 +108,7 @@
 									<strong>Email: </strong><span th:text="${aluno.email}"></span><br>
 									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
 									<strong>Status:</strong><span th:text="${aluno.status}"></span><br>
+									<strong>Sexo:</strong><span th:text="${aluno.sexo}"></span><br>
 								
 								</address>
 								<a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
@@ -143,8 +144,11 @@
 											<th>Nome:</th>
 											<th>Nota 1º bibemestre</th>
 											<th>Nota 2º bibemestre</th>
+											<th>Nota de trabalho</th>
+											<th>Nota de exercicios</th>
 											<th>Media:</th>
 											<th>Status disciplina:</th>
+											<th>Excluir:</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -152,6 +156,9 @@
 					                     <td th:text="${disciplina.id}"></td>
 						                  <td th:text="${disciplina.nome}"></td>
 						                  <td th:text="${disciplina.nota1}"></td>
+						                  <td th:text="${disciplina.nota2}"></td>
+						                   <td th:text="${disciplina.notaTrabalho}"></td>
+										  <td th:text="${disciplina.notaExercicioSala}"></td>
 						                  <td th:text="${disciplina.nota2}"></td>
 						                  <td th:text="${disciplina.media}"></td>	
 						                   <td th:text="${disciplina.statusDisciplinaAluno}"></td>
