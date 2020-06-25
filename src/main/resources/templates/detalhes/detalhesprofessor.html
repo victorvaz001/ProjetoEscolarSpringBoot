@@ -57,10 +57,10 @@
 			<li><a class="app-menu__item" href="/acessosistema"><i
 					class="app-menu__icon fa fa-dashboard"></i><span
 					class="app-menu__label">Inicio</span></a></li>
-			<li><a class="app-menu__item" href="/cadastroaluno"><i
+			<li><a class="app-menu__item" href="/listadeAlunos"><i
 					class="app-menu__icon fa fa-graduation-cap"></i><span
 					class="app-menu__label">Alunos</span></a></li>
-			<li><a class="app-menu__item" href="#"><i
+			<li><a class="app-menu__item" href="/listadeProfessores"><i
 					class="app-menu__icon fa fa-user-circle-o"></i><span
 					class="app-menu__label">Professores</span></a></li>
 			<li><a class="app-menu__item" href="#"><i
@@ -108,10 +108,19 @@
 									<strong>Email: </strong><span th:text="${professor.email}"></span><br>
 								
 								</address>
-								<a class="btn btn-info" th:href="@{/telefones/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
+								<a class="btn btn-info" th:href="@{/telefonesProf/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
 								<a class="btn btn-success" href="/listadeProfessores" data-toggle="tooltip" data-original-title="Listar professores"><i class="fa fa-users"></i>Professor</a>
 								<a class="btn btn-dark" th:href="@{/disciplinas/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Lançar nota de alunos"><i class="fa fa-clipboard"></i>Notas</a>
 								
+							</div>
+							
+							<div class="col-6" >
+							Endereço:<br>
+							<strong>Cep: </strong><span th:text="${professor.cep}"></span><br>
+							<strong>Rua: </strong><span th:text="${professor.rua}"></span><br>
+							<strong>Bairro: </strong><span th:text="${professor.bairro}"></span><br>
+							<strong>Estado: </strong><span th:text="${professor.estado}"></span><br>
+							<strong>Cidade: </strong><span th:text="${professor.cidade}"></span><br>
 							</div>
 						</div>
 				

@@ -76,22 +76,22 @@
             <div class="tile-body">
               <div class="table-responsive">
               
-                 <div class="alert alert-success alert-dismissible fade show" role="alert"  th:each="save : ${msgSave}">
-					  <span th:text = "${save}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de alunos</a></strong> 
+                  <div class="alert alert-success alert-dismissible fade show" role="alert"  th:each="save : ${msgSave}">
+					  <span th:text = "${save}"> </span><strong><a th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> Detalhes do aluno</a></strong> 
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
 				</div>
 				
 				<div class="alert alert-warning alert-dismissible fade show" role="alert"  th:each="edit : ${msgEdit}">
-					  <span th:text = "${edit}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de aluno</a></strong> 
+					  <span th:text = "${edit}"> </span><strong><a th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> Detalhes do aluno</a></strong> 
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
 				</div>
 				
 				  <div class="alert alert-danger alert-dismissible fade show" role="alert"  th:each="delete : ${msgDelete}">
-					 <span th:text = "${delete}"> </span><strong><a href="/acessosistema" class="alert-link" data-toggle="tooltip" data-original-title="Total de professores cadastrados"> cliquei aqui para ver o total de alunos</a></strong> 
+					 <span th:text = "${delete}"> </span> 
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>

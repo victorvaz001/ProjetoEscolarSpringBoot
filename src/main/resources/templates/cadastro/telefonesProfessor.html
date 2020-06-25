@@ -55,12 +55,12 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1>Telefones</h1>
+          <h1>Telefones do professor</h1>
           <p></p>
         </div>
            <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><a href="/acessosistema"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="breadcrumb-item">Detalhes do aluno</li>
+          <li class="breadcrumb-item">Detalhes do professor</li>
           <li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
         </ul>
       </div>
@@ -69,8 +69,8 @@
           <div class="tile">
             <section class="invoice">
               <div class="row mb-4">
-                <div class="col-6" th:each="aluno_ : ${alunoobj}">
-                  <h4 class="page-header"><span th:text="${aluno_.nome}"></span> <span th:text="${aluno_.sobrenome}"></span> </h4>
+                <div class="col-6" th:each="professor_ : ${professorobj}">
+                  <h4 class="page-header"><span th:text="${professor_.nome}"></span> <span th:text="${professor_.sobrenome}"></span> </h4>
                 </div>
                 
                 
@@ -78,18 +78,18 @@
                   <h5 class="text-right"><span id="demo"> </span></h5>
                 </div>
               </div>
-              <div class="row invoice-info" th:each="aluno : ${alunoobj}">
+              <div class="row invoice-info" th:each="professor : ${professorobj}">
                 <div class="col-4">
-                  <address><strong>Matricula:</strong><span th:text=${aluno.id}> </span></address><br/> 
+                  <address><strong>Matricula:</strong><span th:text=${professor.id}> </span></address><br/> 
                 </div>
 
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
-                	
                 	<div th:each="m : ${msg}" class="alert alert-success" role="alert">
             		<span th:text = "${m}"> </span>
             		</div>
+            		
             		
             		<div th:each="m : ${msgDelete}" class="alert alert-danger" role="alert">
             		<span th:text = "${m}"> </span>
@@ -97,8 +97,8 @@
             		
 				   <hr/>
              	   <div class="tile-body">
-             	     <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone</i></h3>
-              <form class="row"  th:action="@{/addfonePessoa/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
+             	     <h3 class="tile-title"><i class="fa fa-phone-square"> Adicionar telefone do Professor</i></h3>
+              <form class="row"  th:action="@{/addfoneProfessor/{professorid}(professorid=${professorobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
                 <div class="form-group col-md-3">
                   <label for="numeroaluno" class="control-label">Numero:</label>
                   <input class="form-control" type="number" placeholder="Informe o telefone" name="numero" id="numero">
@@ -109,10 +109,10 @@
                   <input class="form-control" type="text" placeholder="Ex: casa, comercial, celular.." name="tipo" id="tipo">
                 </div> 
                   
-                <div class="form-group col-md-5 align-self-end" th:each="aluno : ${alunoobj}">
+                <div class="form-group col-md-5 align-self-end" th:each="professor : ${professorobj}">
                   <button  class="btn btn-primary" type="submit" data-toggle="tooltip" data-original-title="Adicionar telefone"><i class="fa fa-floppy-o"></i>Salvar </button>
-                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Listar de alunos</a>
-                  <a class="btn btn-secondary" th:href="@{/detalhealuno/{idaluno}(idaluno=${aluno.id})}" data-toggle="tooltip" data-original-title="Detalhes do aluno"><i class="fa fa-times-circle"></i>Voltar</a>
+                  <a class="btn btn-info" href="/acessosistema" data-toggle="tooltip" data-original-title="Listar alunos"><i class="fa fa-users"></i>Listar de professores</a>
+                   <a class="btn btn-secondary" th:href="@{/detalheprofessor/{idprofessor}(idprofessor=${professor.id})}" data-toggle="tooltip" data-original-title="Detalhes do professor"><i class="fa fa-times-circle"></i>Voltar</a>
          
              	 </div>
               </form>
@@ -130,7 +130,7 @@
                      <tr th:each="fone : ${telefones}">
 		                  <td th:text="${fone.numero}"></td>
 		                  <td th:text="${fone.tipo}"></td>
-		                  <td><a class="btn btn-danger" th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}"  data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+		                  <td><a class="btn btn-danger" th:href="@{/removertelefoneProf/{idtelefone}(idtelefone=${fone.id})}"  data-toggle="tooltip"  data-original-title="Deletar telefone" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
                		 </tr>
                     </tbody>
                   </table>

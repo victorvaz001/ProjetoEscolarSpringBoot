@@ -5,29 +5,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ForeignKey;
 
 @SuppressWarnings("deprecation")
 @Entity
-public class Telefone {
-	
+public class TelefoneProfessor {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	
 	private String numero;
 	
-	
 	private String tipo;
-	
+
 	@ManyToOne
-	@ForeignKey(name = "aluno_id")
-	private Aluno aluno;
-	
+	@ForeignKey(name = "professor_id")
+	private Professor professor;
 
 	public Long getId() {
 		return id;
@@ -53,11 +48,11 @@ public class Telefone {
 		this.tipo = tipo;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
+	public Professor getProfessor() {
+		return professor;
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 }

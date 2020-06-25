@@ -2,6 +2,7 @@ package com.projetoescolar.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Professor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	
 	private String nome;
 	
 	private String sobrenome;
@@ -25,7 +27,70 @@ public class Professor {
 	
 	private Integer idade;
 	
+	private String cep;
 	
+	private String rua;
+	
+	private String bairro;
+	
+	private String cidade;
+	
+	private String estado;
+	
+	
+	@OneToMany(mappedBy = "professor", orphanRemoval = false, cascade = CascadeType.ALL)
+	List<TelefoneProfessor> telefones;
+	
+	
+	public void setTelefones(List<TelefoneProfessor> telefones) {
+		this.telefones = telefones;
+	}
+	
+	public List<TelefoneProfessor> getTelefones() {
+		return telefones;
+	}
+	
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public String getSobrenome() {
 		return sobrenome;
 	}

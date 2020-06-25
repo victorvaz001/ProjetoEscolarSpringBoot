@@ -17,5 +17,6 @@ public interface TelefoneRepository extends CrudRepository<Telefone, Long>{
 	
 	@Query("select t from Telefone t where t.aluno.id = ?1")
 	public List<Telefone> getTelefones(Long alunoid);
+	
 
 }

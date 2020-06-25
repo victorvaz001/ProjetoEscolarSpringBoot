@@ -23,10 +23,12 @@ import com.projetoescolar.model.Disciplina;
 import com.projetoescolar.model.Professor;
 import com.projetoescolar.model.StatusDisciplinaAluno;
 import com.projetoescolar.model.Telefone;
+import com.projetoescolar.model.TelefoneProfessor;
 import com.projetoescolar.repository.AlunoRepository;
 import com.projetoescolar.repository.CursoRepository;
 import com.projetoescolar.repository.DisciplinaRepository;
 import com.projetoescolar.repository.ProfessorRepository;
+import com.projetoescolar.repository.TelefoneProfessorRepository;
 import com.projetoescolar.repository.TelefoneRepository;
 
 @Controller
@@ -47,9 +49,11 @@ public class PessoaController {
 	@Autowired
 	private ProfessorRepository professorRepository;
 	
-	private Double total = 0.0;
+	@Autowired
+	private TelefoneProfessorRepository telefoneProfessorRepository;
+	
 
-	//Ao clicar no link(Cad.Aluno) /acessosistema no index
+	//Ao clicar no link(Cad.Aluno) será redirecionado para /acessosistema no index
 	@RequestMapping(method = RequestMethod.GET, value = "/acessosistema")
 	public ModelAndView inicio() {
 		
@@ -58,22 +62,25 @@ public class PessoaController {
 		andView.addObject("alunos", alunoIt);
 		andView.addObject("alunoobj", new Aluno());
 		
-		Long contAlunosobj = alunoRepository.count();
-		andView.addObject("contAlunosobj", contAlunosobj);
+		  Long contAlunosobj = alunoRepository.count();
+		  andView.addObject("contAlunosobj", contAlunosobj);
 		
 		 Long contProfessoresobj = professorRepository.count();
 		 andView.addObject("contProfessoresobj", contProfessoresobj);
+		 
+		 Long contCursosobj = cursoRepository.count();
+		 andView.addObject("contCursosobj", contCursosobj);
 		
 		return andView;
 	}
 	
-	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
+	//Metodo ao clicar no bota info da lista de alunos
 	@GetMapping("/detalhealuno/{idaluno}")
 	public ModelAndView detalhesAluno(@PathVariable("idaluno") Long idaluno) {
 		
 		Optional<Aluno> aluno = alunoRepository.findById(idaluno);
 		 
-		 ModelAndView modelAndView =  new ModelAndView("cadastro/detelhesaluno");
+		 ModelAndView modelAndView =  new ModelAndView("detalhes/detalhesaluno");
 		 modelAndView.addObject("alunoobj", aluno.get());
 		 modelAndView.addObject("cursos", cursoRepository.findAll());
 		 modelAndView.addObject("cursoobj", aluno.get().getCurso());
@@ -86,6 +93,7 @@ public class PessoaController {
 	public ModelAndView detalheProfessor(@PathVariable("idprofessor") Long idprofessor) {
 		
 		Optional<Professor> professor = professorRepository.findById(idprofessor);
+		
 		ModelAndView modelAndView = new ModelAndView("detalhes/detalhesprofessor");
 		modelAndView.addObject("professorobj", professor.get());
 		
@@ -93,7 +101,7 @@ public class PessoaController {
 		
 	}
 	
-	//Metodo ao clicar no link Aluno e no botao novo aluno e link Alunos
+	//Metodo ao clicar no botao novo aluno
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastroaluno")
 	public ModelAndView inicioCadastroAluno() {
 		
@@ -103,7 +111,7 @@ public class PessoaController {
 		 return modelAndView;
 	}
 	
-	//Ao clicar no link(Cad.Aluno) /acessosistema no index
+	//Ao clicar no link Alunos no menu inicial a direita ou Link Aluno pagina inicial
 	@RequestMapping(method = RequestMethod.GET, value = "/listadeAlunos")
 	public ModelAndView inicioListaAlunos() {
 		
@@ -115,7 +123,7 @@ public class PessoaController {
 	}
 	
 	
-	//Ao clicar no link(Cad.Aluno) /acessosistema no index
+	//Ao clicar no link Professores no menu inicial a direita
 	@RequestMapping(method = RequestMethod.GET, value = "/listadeProfessores")
 	public ModelAndView inicioListaProfessores() {
 		
@@ -219,7 +227,7 @@ public class PessoaController {
 		 
 			List<String> msgDelete = new ArrayList<String>();
 		 
-			msgDelete.add("Professor removido com sucesso!");
+			msgDelete.add("Aluno removido com sucesso!");
 			modelAndView.addObject("msgDelete", msgDelete);
 		 
 		 return modelAndView;
@@ -246,10 +254,11 @@ public class PessoaController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value="**/salvarprofessor")
-	public ModelAndView salvarProfessor(Professor professor) {
+	public ModelAndView salvarProfessor(@Valid Professor professor) {
 		
 		List<String> msgSave = new ArrayList<String>();
 		List<String> msgEdit = new ArrayList<String>();
+		
 		
 		ModelAndView modelAndView = new ModelAndView("listas/listadeProfessores");
 		
@@ -304,11 +313,26 @@ public class PessoaController {
 		 return modelAndView;
 	}
 	
+	@GetMapping("/telefonesProf/{idprofessor}")
+	public ModelAndView telefonesProfessor(@PathVariable("idprofessor") Long idprofessor) {
+		
+		Optional<Professor> professor = professorRepository.findById(idprofessor);
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefonesProfessor");
+		
+		modelAndView.addObject("professorobj", professor.get());
+		modelAndView.addObject("telefones", telefoneProfessorRepository.getTelefoneProf(idprofessor));
+		
+		return modelAndView;
+		
+	}
+	
 	
 	@PostMapping("**/addfonePessoa/{alunoid}")
 	public ModelAndView addfonePessoa(Telefone telefone, @PathVariable("alunoid") Long alunoid) {
 		
 		Aluno aluno = alunoRepository.findById(alunoid).get();
+		
 		List<String> msg = new ArrayList<String>(); /*Mostrar as validaçoes*/
 		if(telefone != null && telefone.getNumero().isEmpty() || telefone.getTipo().isEmpty()) {
 				
@@ -344,6 +368,25 @@ public class PessoaController {
 		return modelAndView;
 	}
 	
+	@PostMapping("**/addfoneProfessor/{professorid}")
+	public ModelAndView addfoneProfessor(TelefoneProfessor telefone, @PathVariable("professorid") Long professorid) {
+		
+		Professor professor = professorRepository.findById(professorid).get();
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefonesProfessor");
+		
+		List<String> msg = new ArrayList<String>();
+		
+		telefoneProfessorRepository.save(telefone);
+		msg.add("Telefone salvo com sucesso");
+		modelAndView.addObject("msg", msg);
+		
+		telefone.setProfessor(professor);
+		modelAndView.addObject("professorobj", professor);
+		modelAndView.addObject("telefones", telefoneProfessorRepository.getTelefoneProf(professorid));
+		return modelAndView;
+	}
+	
 	
 	@GetMapping("/removertelefone/{idtelefone}")
 	public ModelAndView removerTelefone(@PathVariable("idtelefone") Long idtelefone) {
@@ -356,7 +399,33 @@ public class PessoaController {
 	     modelAndView.addObject("alunoobj", aluno);
 	     modelAndView.addObject("cursoobj", aluno.getCurso().getNome());
 	     modelAndView.addObject("telefones", telefoneRepository.getTelefones(aluno.getId()));
+	     
+	     List<String> msgDelete = new ArrayList<String>();
+		
+		 msgDelete.add("Telefone removido com sucesso");
+		 modelAndView.addObject("msgDelete", msgDelete);
+	     
 		 return modelAndView;
+	}
+	
+	@GetMapping("/removertelefoneProf/{idtelefone}")
+	public ModelAndView removertelefoneProf(@PathVariable("idtelefone") Long idtelefone) {
+		
+		Professor professor = telefoneProfessorRepository.findById(idtelefone).get().getProfessor();
+		
+		telefoneProfessorRepository.deleteById(idtelefone);
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefonesProfessor");
+		modelAndView.addObject("professorobj", professor);
+		modelAndView.addObject("telefones", telefoneProfessorRepository.getTelefoneProf(professor.getId()));
+		
+		List<String> msgDelete = new ArrayList<String>();
+		
+		msgDelete.add("Telefone removido com sucesso");
+		modelAndView.addObject("msgDelete", msgDelete);
+		
+		return modelAndView;
+		
 	}
 	
 	@GetMapping("/disciplinas/{idaluno}")
@@ -434,6 +503,10 @@ public class PessoaController {
 		
 		modelAndView.addObject("alunoobj", aluno);
 		modelAndView.addObject("disciplinas", disciplinaRepository.getDisiciplina(alunoid));
+		
+		Long contCursos = cursoRepository.count();
+		System.out.println("Total de cursos disponiveis = " + contCursos);
+	
 		
 		return modelAndView;
 		
