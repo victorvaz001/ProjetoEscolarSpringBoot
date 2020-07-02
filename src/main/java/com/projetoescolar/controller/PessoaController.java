@@ -91,6 +91,8 @@ public class PessoaController {
 		 return modelAndView;
 	}
 	
+
+	
 	@GetMapping("detalheprofessor/{idprofessor}")
 	public ModelAndView detalheProfessor(@PathVariable("idprofessor") Long idprofessor) {
 		

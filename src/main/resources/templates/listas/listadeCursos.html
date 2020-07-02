@@ -64,34 +64,90 @@
           <li class="breadcrumb-item"><a href="/acessosistema">Lista de Cursos</a></li>
         </ul>
       </div>
-             
-    <div class="row" >
-        <div class="col-md-6" th:each="curso : ${cursoobj}">
-          <div class="tile">
-            <h3 class="tile-title"><span th:text="${curso.nome}"></span></h3>
-            <div class="tile-body">
-           	 <b>Sore o curso</b><br/><br/>
-            	
-            	<b>Tipo:</b>
-            	<p th:text="${curso.tipo}"> </p>
-            	
-            	<b>Unidade disponível:</b>
-            	<p th:text="${curso.unidade}"> </p>
-            	
-            	<b>Estado:</b>
-            	<p th:text="${curso.estado}"> </p>
-            	
-            	<b>Cidade:</b>
-            	<p th:text="${curso.cidade}"> </p>
-            	
-            </div>
-            <div class="tile-footer"><a class="btn btn-primary" href="/cadastroaluno">Fazer inscrição</a></div>
-          </div>
-        </div>
-      </div>
-         
-          
-    </main>
+
+		<div class="row">
+			<div class="col-md-6" th:each="curso : ${cursoobj}">
+				<div class="tile">
+					<h4 class="tile-title">
+						<span th:text="${curso.nome}"></span>
+					</h4>
+					<div class="tile-body">
+						<b>Sore o curso</b><br /> <br /> <b>Tipo:</b>
+						<p th:text="${curso.tipo}"></p>
+
+						<b>Unidade disponível:</b>
+						<p th:text="${curso.unidade}"></p>
+
+						<b>Estado:</b>
+						<p th:text="${curso.estado}"></p>
+
+						<b>Cidade:</b>
+						<p th:text="${curso.cidade}"></p>
+
+					</div>
+					<div class="tile-footer" data-toggle="modal" data-target="#exampleModal">
+						<a class="btn btn-primary" href="#">Detalhes do 
+							curso</a>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Detalhes do curso</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								<p><h4><i class="fa fa-globe" aria-hidden="true"> </i> Sobre o Curso</h4><br/> O curso de sistemas
+									de informação da Faculdade Fernandez forma profissionais para
+									atuar no mercado de tecnologia, um dos mais promissores
+									atualmente. Na faculdade, os alunos aprendem a desenvolver e
+									administrar fluxos de informações, a cuidar de processamento,
+									armazenamento e recuperação de dados. Com sólida formação
+									teórica e prática, os futuros profissionais são preparados para
+									aliar conhecimentos em informática e em gestão organizacional,
+									sendo, assim, capazes de gerir dados com segurança e qualidade.
+								</p>
+							
+								<p><h4><i class="fa fa-graduation-cap" aria-hidden="true"></i> Para quem se destina?</h4><br/> Os alunos de sistemas de
+										informação têm afinidade com temas relacionados a tecnologia,
+										gostam e sabem mexer nos mais variados gadgets, softwares e
+										apps. É importante gostar e ter facilidade com disciplinas das
+										ciências exatas, como matemática. Raciocínio lógico,
+										capacidade de resolver problemas, organização e foco são
+										outras características que fazem a diferença nesta área.
+							   </p>
+									
+									<p><h4><i class="fa fa-id-card" aria-hidden="true"></i> Áreas de atuação </h4><br/> Depois de concluir o curso de sistemas de
+									informação, os profissionais recém-formados podem procurar
+									emprego em empresas e organizações, públicas e privadas, dos
+									mais variados segmentos. Veja algumas possibilidades: -
+									Desenvolvimento e implementação de sistemas de informação; -
+									Processamento, armazenamento e recuperação de dados, -
+									Desenvolvimento, suporte e manutenção de softwares; - Marketing
+									e vendas de softwares e sistemas; - Consultoria na área de
+									informática; - Pesquisa científica.</p>
+									
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
        <!-- Essential javascripts for application to work-->
     <script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="/bootstrap/js/popper.min.js"></script>
@@ -131,7 +187,6 @@
       	ga('send', 'pageview');
       }
     </script>
-	
 
   </body>
 </html>

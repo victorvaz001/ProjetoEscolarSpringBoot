@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	
+<head>
+
+<title>Detalhes do Professor</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Main CSS-->
+
+<link rel="stylesheet" type="text/css" href="/bootstrap/css/main.css">
+<!-- Font-icon css-->
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+</head>
+<body class="app sidebar-mini" >
+	<!-- Navbar-->
+	<header class="app-header">
+		<a class="app-header__logo" href="index.html"><i
+			class="fa fa-graduation-cap"></i> Colégio Fernandez</a>
+		<!-- Sidebar toggle button-->
+		<a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+			aria-label="Hide Sidebar"></a>
+		<!-- Navbar Right Menu-->
+		<ul class="app-nav">
+
+			<!--Notification Menu-->
+
+			<!-- User Menu-->
+			<li class="dropdown"><a class="app-nav__item" href="#"
+				data-toggle="dropdown" aria-label="Open Profile Menu"><i
+					class="fa fa-user fa-lg"></i></a>
+				<ul class="dropdown-menu settings-menu dropdown-menu-right">
+					<li><a class="dropdown-item" href="#"><i
+							class="fa fa-sign-out fa-lg"></i> Sair</a></li>
+				</ul></li>
+		</ul>
+	</header>
+	<!-- Sidebar menu-->
+
+	<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+	<aside class="app-sidebar">
+		<div class="app-sidebar__user">
+			<div>
+				<p class="app-sidebar__user-name">Bem vindo ao sistema</p>
+				<p class="app-sidebar__user-designation"></p>
+			</div>
+		</div>
+		<ul class="app-menu">
+			<li><a class="app-menu__item" href="/acessosistema"><i
+					class="app-menu__icon fa fa-dashboard"></i><span
+					class="app-menu__label">Inicio</span></a></li>
+			<li><a class="app-menu__item" href="/listadeAlunos"><i
+					class="app-menu__icon fa fa-graduation-cap"></i><span
+					class="app-menu__label">Alunos</span></a></li>
+			<li><a class="app-menu__item" href="/listadeProfessores"><i
+					class="app-menu__icon fa fa-user-circle-o"></i><span
+					class="app-menu__label">Professores</span></a></li>
+			<li><a class="app-menu__item" href="#"><i
+					class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Biblioteca</span></a></li>
+			<li><a class="app-menu__item" href="#"><i
+					class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i><span
+					class="app-menu__label">Sair</span></a></li>
+		</ul>
+	</aside>
+	<main class="app-content">
+		<div class="app-title">
+			<div>
+				<h1>Perfil</h1>
+				<p></p>
+			</div>
+			<ul class="app-breadcrumb breadcrumb">
+				<li class="breadcrumb-item"><a href="/acessosistema"><i
+						class="fa fa-home fa-lg"></i></a></li>
+				<li class="breadcrumb-item">Detalhes do professor</li>
+				<li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tile" th:each="curso : ${cursoobj}">
+					<section class="invoice">
+						<div class="row mb-4" >
+							<div class="col-6">
+								<h4 class="page-header">
+									<i class="fa fa-globe"></i> Detalhes do professor
+								</h4>
+							</div>
+							<div class="col-6">
+								<h5 class="text-right"><span id="demo"></span></h5>
+							</div>
+						</div>
+						<div class="row invoice-info" th:each="professor : ${professorobj}">
+							<div class="col-6" >
+								Sobre:
+								<address>
+									<strong>Matricula: </strong><span th:text="${professor.id}"></span><br>
+									<strong>Nome: </strong><span th:text="${professor.nome}"></span>
+									<span th:text="${professor.sobrenome}"></span><br>
+									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
+									<strong>Turno:</strong> <span th:text="${professor.turno}"></span><br>
+								    <strong>Nome:</strong> <span th:text="${professor.nome}"></span>
+									<span th:text="${professor.sobrenome}"></span><br>
+									<strong>Idade: </strong><span th:text="${professor.idade}"></span><br>
+									<strong>Email: </strong><span th:text="${professor.email}"></span><br>
+									<strong>Sexo:</strong><span th:text="${professor.sexo}"></span><br>
+								
+								</address>
+								<a class="btn btn-info" th:href="@{/telefonesProf/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
+								<a class="btn btn-success" href="/listadeProfessores" data-toggle="tooltip" data-original-title="Listar professores"><i class="fa fa-users"></i>Professor</a>
+								<a class="btn btn-secondary" href="/acessosistema" data-toggle="tooltip" data-original-title="Inicio Sistema"><i class="fa fa-times-circle"></i>Voltar</a>
+								
+							</div>
+							
+							<div class="col-6" >
+							Endereço:<br>
+							<strong>Cep: </strong><span th:text="${professor.cep}"></span><br>
+							<strong>Rua: </strong><span th:text="${professor.rua}"></span><br>
+							<strong>Bairro: </strong><span th:text="${professor.bairro}"></span><br>
+							<strong>Estado: </strong><span th:text="${professor.estado}"></span><br>
+							<strong>Cidade: </strong><span th:text="${professor.cidade}"></span><br>
+							</div>
+						</div>
+				
+             	 			
+						<br/>
+						<div class="row">
+						
+							<div class="col-12 table-responsive">
+								<h4 class="page-header">
+									<i class="fa fa-graduation-cap"></i> Meus Alunos
+									
+								</h4>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Id:</th>
+											<th>Nome:</th>
+											<th>Sobrenome:</th>
+											<th>Curso:</th>
+											<th>Período</th>
+											<th>Turno</th>
+
+										</tr>
+									</thead>
+									<tbody>
+					                    <tr th:each="aluno : ${alunoobj}">
+					                     <td th:text="${aluno.id}"></td>
+						                  <td th:text="${aluno.nome}"></td>
+						                  <td th:text="${aluno.sobrenome}"></td>
+						                  <td th:text="${curso.nome}"></td>
+						                   <td th:text="${aluno.periodo}"></td>
+						                  <td th:text="${aluno.turno}"></td>	
+
+			               		 	   </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+
+
+	</main>
+	<!-- Essential javascripts for application to work-->
+	<script src="/bootstrap/js/jquery-3.3.1.min.js"></script>
+	<script src="/bootstrap/js/popper.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/bootstrap/js/main.js"></script>
+	<!-- The javascript plugin to display page loading on top-->
+	<script src="/bootstrap/js/plugins/pace.min.js"></script>
+	<!-- Page specific javascripts-->
+	<!-- Data table plugin-->
+	<script type="text/javascript"
+		src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript">$('#sampleTable').DataTable();</script>
+	<!-- Google analytics script-->
+	<script type="text/javascript">
+      if(document.location.hostname == 'pratikborsadiya.in') {
+      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      	ga('create', 'UA-72504830-1', 'auto');
+      	ga('send', 'pageview');
+      }
+    </script>
+
+	<script type="text/javascript">
+    
+    	function validarCampos(){
+
+    		numero = document.getElementById('numero').value;
+    		tipo = document.getElementById('tipo').value;
+    		
+    		if(numero === ''){
+    			alert('Número deve ser informado');
+    			document.getElementById('numero').focus();    			
+    			return false;
+    		}
+    		else if(tipo === ''){
+    			alert('Tipo de ser informado');
+    			document.getElementById('tipo').focus();
+    			return false;
+    		}
+    		
+    		return true;
+    		
+    		
+    	}
+    
+    </script>
+
+	<script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d.toDateString();
+
+
+</script>
+
+</body>
+</html>
