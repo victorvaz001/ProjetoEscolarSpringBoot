@@ -94,6 +94,13 @@
              	     <h3 class="tile-title"><i class="fa fa-graduation-cap 3x"> Adicionar disiciplina</i></h3>
               <form class="row" th:object="${alunoobj}"  th:action="@{/adddisciplinaaluno/{alunoid}(alunoid=${alunoobj.id})}" method="post" onsubmit="return validarCampos() ? true : false">
                 
+               
+               <div class="form-group col-md-6">
+                  <label for="numeroaluno" class="control-label">Id:</label>
+                  <input class="form-control" type="text" placeholder="" name="id" id="id"  readonly="readonly">
+                </div>
+               
+               
                 <div class="form-group col-md-6">
                   <label for="numeroaluno" class="control-label">Nome:</label>
                   <input class="form-control" type="text" placeholder="Informe a disciplina" name="nome" id="nome" >
@@ -129,9 +136,13 @@
               </form>
             </div>
                 
-                  <table class="table table-striped" th:object="${disciplinaobj}">
+                  <table class="table table-striped" th:object="${disciplinaobj} ">
+                  		
+                  				
+                  
                     <thead>
                       <tr>
+                     	<th>Id:</th>
 						<th>Nome:</th>
 						<th>Nota 1º bibemestre</th>
 						<th>Nota 2º bibemestre</th>
@@ -143,7 +154,12 @@
                       </tr>
                     </thead>
                     <tbody>
+                   		   
+                
+                   		   
                       <tr th:each="disciplina : ${disciplinas}">
+                   
+                         <td th:text="${disciplina.id}"></td>
 						 <td th:text="${disciplina.nome}"></td>
 						  <td th:text="${disciplina.nota1}"></td>
 						  <td th:text="${disciplina.nota2}"></td>
@@ -204,7 +220,7 @@
     			return false;
     		}
     		
-    		else if(nota1 === ''){
+    		/*else if(nota1 === ''){
     			alert('A nota 1 deve ser informada');
     			document.getElementById('nota1').focus();
     			return false;
@@ -212,7 +228,10 @@
     			alert('A nota 2 deve ser informada');
     			document.getElementById('nota2').focus();
     			return false;
-    		} else if (nota1 >= 100){
+    		} 
+    		*/
+    		
+    		else if (nota1 >= 100){
     			alert('Nota 1  deve ser menor que 100 pontos');
     			document.getElementById('nota1').focus();    			
     			return false;

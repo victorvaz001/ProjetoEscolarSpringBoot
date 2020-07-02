@@ -1,6 +1,7 @@
 package com.projetoescolar.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,9 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ForeignKey;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Aluno implements Serializable {
@@ -54,6 +60,10 @@ public class Aluno implements Serializable {
 	@OneToMany(mappedBy = "aluno", orphanRemoval = false, cascade = CascadeType.ALL)
 	private List<Disciplina> disciplinas;
 	
+	@ManyToOne
+	@ForeignKey(name = "professor_id")
+	private Professor professor;
+	
 	
 	private String cep;
 	
@@ -66,6 +76,38 @@ public class Aluno implements Serializable {
 	private String estado;
 	
 	private String sexo;
+	
+	private String turno;
+	
+	private String periodo;
+	
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+	
+	public String getPeriodo() {
+		return periodo;
+	}
+	
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+	
+	public String getTurno() {
+		return turno;
+	}
 	
 	public String getSexo() {
 		return sexo;
@@ -192,4 +234,5 @@ public class Aluno implements Serializable {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
+	
 }

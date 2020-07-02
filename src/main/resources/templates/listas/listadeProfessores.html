@@ -118,7 +118,9 @@
                       <td th:text=${professor.email}></td>
                       <td><a class="btn btn-warning" th:href="@{/editarprofessor/{idprofessor}(idprofessor=${professor.id})}"  data-toggle="tooltip"  data-original-title="Editar professor"><span class="fa fa-pencil-square-o"></span></a></td>
                       <td><a class="btn btn-danger" th:href="@{/removerprofessor/{idprofessor}(idprofessor=${professor.id})}"  data-toggle="tooltip"  data-original-title="Deletar professor" onclick="return confirm('Confirmar exclusão?');"><span class="fa fa-trash"></span></a></td>
+                   	  
                    	  <td><a class="btn btn-info" th:href="@{/detalheprofessor/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Detalhes do professor"><i class="fa fa-info-circle"></i>Info</a></td>
+                   	 
                     </tr>
                   </tbody>
                 </table>

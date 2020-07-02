@@ -14,7 +14,9 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- 
+ 	 
+ 	
+ 	
  
   </head>
   <body class="app sidebar-mini">
@@ -94,9 +96,15 @@
 	                  <input class="form-control" type="email" placeholder="Informe um E-mail" name="email"  th:field="*{email}">
                 </div>
                 
+                 <div class="form-group col-md-6">
+	                  <label class="control-label">Data de Nascimento</label>
+	                  <input class="form-control" type="date"  name="dataNascimento" id="dataNascimento"  th:field="*{dataNascimento}">
+                </div>
+               
+               
                 <div class="form-group col-md-6">
 	                  <label class="control-label">Idade:</label>
-	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}">
+	                  <input class="form-control" type="number"  name="idade"  th:field="*{idade}" placeholder="Data Nasc.">
                 </div>
                 
                 <div class="form-group col-md-6">
@@ -113,6 +121,32 @@
                     <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
                     </select>
                   </div>
+                  
+                          
+                  <div class="form-group col-md-6">
+                    <label for="turno">Turno</label>
+                    <select class="form-control" th:field="*{turno}">
+                      <option value="MANHA" th:text="Manha"/>
+                      <option value="NOITE"  th:text="Noite"/> 
+                    </select>
+                  </div>
+                  
+                      <div class="form-group col-md-6">
+                    <label for="periodo">Periodo</label>
+                    <select class="form-control" th:field="*{periodo}">
+                      <option value="PRIMEIRO" th:text="Primeiro"/>
+                      <option value="SEGUNDO"  th:text="Segundo"/> 
+                      <option value="TERCEIRO"  th:text="Terceiro"/> 
+                      <option value="QUARTO"  th:text="Quarto"/> 
+                      <option value="QUINTO"  th:text="Quinto"/> 
+                      <option value="SEXTO"  th:text="Sexto"/> 
+                      <option value="SETIMO"  th:text="Setimo"/> 
+                      <option value="OITAVO"  th:text="Oitavo"/> 
+                      <option value="NONO"  th:text="Nono"/> 
+                      <option value="DECIMO"  th:text="Decimo"/> 
+                    </select>
+                  </div>
+                  
                   
                    <div class="form-group col-md-6">
                   <label class="control-label">Cep:</label>
@@ -207,6 +241,8 @@
     <script type="text/javascript" >
 
         $(document).ready(function() {
+        	
+       	
 
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.

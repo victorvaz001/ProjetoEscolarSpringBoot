@@ -6,7 +6,7 @@
 	
 <head>
 
-<title>Detalhes do aluno</title>
+<title>Detalhes do Professor</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,7 +85,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="tile">
+				<div class="tile" th:each="curso : ${cursoobj}">
 					<section class="invoice">
 						<div class="row mb-4" >
 							<div class="col-6">
@@ -102,6 +102,10 @@
 								Sobre:
 								<address>
 									<strong>Matricula: </strong><span th:text="${professor.id}"></span><br>
+									<strong>Nome: </strong><span th:text="${professor.nome}"></span>
+									<span th:text="${professor.sobrenome}"></span><br>
+									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
+									<strong>Turno:</strong> <span th:text="${professor.turno}"></span><br>
 								    <strong>Nome:</strong> <span th:text="${professor.nome}"></span>
 									<span th:text="${professor.sobrenome}"></span><br>
 									<strong>Idade: </strong><span th:text="${professor.idade}"></span><br>
@@ -111,7 +115,7 @@
 								</address>
 								<a class="btn btn-info" th:href="@{/telefonesProf/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>
 								<a class="btn btn-success" href="/listadeProfessores" data-toggle="tooltip" data-original-title="Listar professores"><i class="fa fa-users"></i>Professor</a>
-								<a class="btn btn-dark" th:href="@{/disciplinas/{idprofessor}(idprofessor=${professor.id})}" title="" data-toggle="tooltip"  data-original-title="Lançar nota de alunos"><i class="fa fa-clipboard"></i>Notas</a>
+								<a class="btn btn-secondary" href="/acessosistema" data-toggle="tooltip" data-original-title="Inicio Sistema"><i class="fa fa-times-circle"></i>Voltar</a>
 								
 							</div>
 							
@@ -131,7 +135,7 @@
 						
 							<div class="col-12 table-responsive">
 								<h4 class="page-header">
-									<i class="fa fa-clipboard"></i> Disciplinas
+									<i class="fa fa-graduation-cap"></i> Meus Alunos
 									
 								</h4>
 								<table class="table table-striped">
@@ -139,20 +143,22 @@
 										<tr>
 											<th>Id:</th>
 											<th>Nome:</th>
-											<th>Nota 1º bibemestre</th>
-											<th>Nota 2º bibemestre</th>
-											<th>Media:</th>
-											<th>Status disciplina:</th>
+											<th>Sobrenome:</th>
+											<th>Curso:</th>
+											<th>Período</th>
+											<th>Turno</th>
+
 										</tr>
 									</thead>
 									<tbody>
-					                    <tr th:each="disciplina : ${disciplinas}">
-					                     <td th:text="${disciplina.id}"></td>
-						                  <td th:text="${disciplina.nome}"></td>
-						                  <td th:text="${disciplina.nota1}"></td>
-						                  <td th:text="${disciplina.nota2}"></td>
-						                  <td th:text="${disciplina.media}"></td>	
-						                   <td th:text="${disciplina.statusDisciplinaAluno}"></td>
+					                    <tr th:each="aluno : ${alunoobj}">
+					                     <td th:text="${aluno.id}"></td>
+						                  <td th:text="${aluno.nome}"></td>
+						                  <td th:text="${aluno.sobrenome}"></td>
+						                  <td th:text="${curso.nome}"></td>
+						                   <td th:text="${aluno.periodo}"></td>
+						                  <td th:text="${aluno.turno}"></td>	
+
 			               		 	   </tr>
 									</tbody>
 								</table>

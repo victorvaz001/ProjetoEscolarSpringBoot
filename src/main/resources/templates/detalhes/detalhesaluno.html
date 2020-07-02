@@ -104,11 +104,13 @@
 									<strong>Matricula: </strong><span th:text="${aluno.id}"></span><br>
 								    <strong>Nome:</strong> <span th:text="${aluno.nome}"></span>
 									<span th:text="${aluno.sobrenome}"></span><br>
-									<strong>Idade: </strong><span th:text="${aluno.idade}"></span><br>
+									<strong>Data de nascimento: </strong><span th:text="${aluno.dataNascimento}"></span><br>
 									<strong>Email: </strong><span th:text="${aluno.email}"></span><br>
-									<strong>Curso:</strong> <span th:text="${curso.nome}"></span><br>
-									<strong>Status:</strong><span th:text="${aluno.status}"></span><br>
-									<strong>Sexo:</strong><span th:text="${aluno.sexo}"></span><br>
+									<strong>Curso: </strong> <span th:text="${curso.nome}"></span><br>
+									<strong>Status: </strong><span th:text="${aluno.status}"></span><br>
+									<strong>Turno: </strong><span th:text="${aluno.turno}"></span><br>
+									<strong>Periodo: </strong><span th:text="${aluno.periodo}"></span><br>
+									<strong>Sexo: </strong><span th:text="${aluno.sexo}"></span><br>
 								
 								</address>
 								<a class="btn btn-info" th:href="@{/telefones/{idaluno}(idaluno=${aluno.id})}" title="" data-toggle="tooltip"  data-original-title="Adicionar telefones"><i class="fa fa-phone"></i>Telefones</a>

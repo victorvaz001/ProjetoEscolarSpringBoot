@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projetoescolar.model.Aluno;
-import com.projetoescolar.model.Cursos;
 import com.projetoescolar.model.Disciplina;
 import com.projetoescolar.model.Professor;
 import com.projetoescolar.model.StatusDisciplinaAluno;
@@ -93,11 +92,34 @@ public class PessoaController {
 	public ModelAndView detalheProfessor(@PathVariable("idprofessor") Long idprofessor) {
 		
 		Optional<Professor> professor = professorRepository.findById(idprofessor);
+		Iterable<Aluno> alunoIt  = alunoRepository.findAll();
+		List<Aluno> alunos = new ArrayList<>();
+
 		
 		ModelAndView modelAndView = new ModelAndView("detalhes/detalhesprofessor");
 		modelAndView.addObject("professorobj", professor.get());
+		modelAndView.addObject("cursoobj", professor.get().getCurso());		
+		
+		Integer cont = 0;
+		boolean invoValida = false;
+		
+		for (Aluno aluno2 : alunoIt) {
+			if(aluno2.getCurso().getNome() == professor.get().getCurso().getNome()
+					&& aluno2.getTurno().equals(professor.get().getTurno())) {
+				alunos.add(aluno2);
+				invoValida = true;
+			}
+		}
+		professor.get().setAlunos(alunos);
+		
+		if(invoValida == true) {
+			Iterable<Aluno> alunoIt2  = alunoRepository.findAll();
+			modelAndView.addObject("alunoobj", alunos);
+			return modelAndView;
+		}
 		
 		return modelAndView;
+		
 		
 	}
 	
@@ -143,7 +165,7 @@ public class PessoaController {
 		
 		 ModelAndView modelAndView =  new ModelAndView("cadastro/cadastroprofessor");
 		 modelAndView.addObject("professorobj", new Professor());
-		 //modelAndView.addObject("cursos", cursoRepository.findAll());
+		 modelAndView.addObject("cursos", cursoRepository.findAll());
 		 return modelAndView;
 	}
 	
@@ -184,6 +206,7 @@ public class PessoaController {
 		
 		
 		alunoRepository.save(aluno);
+				
 		Long contAlunosobj = alunoRepository.count();
 		Long contProfessoresobj = professorRepository.count();
 		
@@ -273,10 +296,17 @@ public class PessoaController {
 		}
 
 		professorRepository.save(professor);
+		
+		
+		
+		
+		
 		Iterable<Professor> professorIt = professorRepository.findAll();
 		modelAndView.addObject("professores", professorIt);
-		modelAndView.addObject("cursos", cursoRepository.findAll());
+		modelAndView.addObject("cursoobj", cursoRepository.findAll());
 		modelAndView.addObject("professorobj", new Professor());
+		
+		
 		
 	
 		return modelAndView;
@@ -290,6 +320,7 @@ public class PessoaController {
 		Optional<Professor> professor = professorRepository.findById(idprofessor);
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroprofessor");
 		modelAndView.addObject("professorobj", professor.get());
+		modelAndView.addObject("cursos", cursoRepository.findAll());
 		
 		
 		return modelAndView;
@@ -447,6 +478,18 @@ public class PessoaController {
 		
 		Aluno aluno = alunoRepository.findById(alunoid).get();
 		List<String> msg = new ArrayList<String>(); /*Mostrar as validaçoes*/
+		
+		
+		if(disiciplina.getNota1() == null ) {
+			disiciplina.setNota1(0.0);
+		} 
+		if (disiciplina.getNota2() == null) {
+			disiciplina.setNota2(0.0);
+		}
+		
+		
+		
+		
 		if(disiciplina != null && disiciplina.getNota1() >= 100 || disiciplina.getNota2() >=100 ) {
 			
 			
@@ -466,20 +509,21 @@ public class PessoaController {
 		}
 		
 		double total = disiciplina.getNota1() + disiciplina.getNota2();
-		StatusDisciplinaAluno result;
+		StatusDisciplinaAluno result = null;
 		double media;
 		
 		media = total / 2;
 		
-		if(disiciplina.getNotaExercicioSala() == null|| disiciplina.getNotaTrabalho() == null) {
-			result = StatusDisciplinaAluno.EM_AVALIACAO;
+		
+	    if(disiciplina.getNotaExercicioSala() == null|| disiciplina.getNotaTrabalho() == null) {
+			//result = StatusDisciplinaAluno.EM_AVALIACAO;
 			
 			ModelAndView modelAndView = new ModelAndView("cadastro/disciplinas");
 			
 			disiciplina.setTotal(total);
 			disiciplina.setMedia(media);
 			
-			disiciplina.setStatusDisciplinaAluno(result);
+			disiciplina.setStatusDisciplinaAluno(result.EM_AVALIACAO);
 			
 			disciplinaRepository.save(disiciplina);
 			msg.add("Disciplina cadastrada com sucesso!");
@@ -490,11 +534,10 @@ public class PessoaController {
 			modelAndView.addObject("alunoobj", aluno);
 			modelAndView.addObject("disciplinas", disciplinaRepository.getDisiciplina(alunoid));
 			
-			Long contCursos = cursoRepository.count();
-			System.out.println("Total de cursos disponiveis = " + contCursos);
 			
 			return modelAndView;
 		} 
+		
 		else if (media >= 30.0 || media <= 0.0) {
 				if (media != 0.0) {
 					if (media >= 50.00) {
@@ -549,5 +592,7 @@ public class PessoaController {
 		return modelAndView;
 		
 	}
+	
+
 
 }

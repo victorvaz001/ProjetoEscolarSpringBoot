@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -37,11 +38,44 @@ public class Professor {
 	
 	private String estado;
 	
-	
+
 	@OneToMany(mappedBy = "professor", orphanRemoval = false, cascade = CascadeType.ALL)
 	List<TelefoneProfessor> telefones;
 	
+	@OneToMany(mappedBy = "professor", orphanRemoval = false, cascade = CascadeType.ALL)
+	List<Aluno> alunos;
 	
+
+	@ManyToOne
+	private Cursos curso;
+	
+	private String turno;
+	
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+	
+	public String getTurno() {
+		return turno;
+	}
+	
+	
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+	
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public Cursos getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Cursos curso) {
+		this.curso = curso;
+	}
+
 	public void setTelefones(List<TelefoneProfessor> telefones) {
 		this.telefones = telefones;
 	}

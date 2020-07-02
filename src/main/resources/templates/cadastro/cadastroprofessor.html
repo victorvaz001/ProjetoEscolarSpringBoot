@@ -92,6 +92,8 @@
                   <input class="form-control" type="text" placeholder="Entre com o primeiro nome" id="sobrenome" name="sobrenome" required="required" th:field="*{sobrenome}">
                 </div>
                 
+                
+                
                 <div class="form-group col-md-6">
                   <label class="control-label">Email</label>
                   <input class="form-control" type="email" placeholder="Informe o E-mail" id="email" name="email" required="required" th:field="*{email}">
@@ -101,6 +103,21 @@
                   <label class="control-label">Idade</label>
                   <input class="form-control" type="number" placeholder="Informe sua idade" id="idade" name="idade" required="required" th:field="*{idade}">
                 </div>
+                
+                    <div class="form-group col-md-6">
+                    <label for="cursos">Curso:</label>
+                    <select class="form-control" th:field="*{curso}" id="cursos">
+                    <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"/>
+                    </select>
+                  </div>
+                  
+                   <div class="form-group col-md-6">
+                    <label for="turno">Turno</label>
+                    <select class="form-control" th:field="*{turno}">
+                      <option value="MANHA" th:text="Manha"/>
+                      <option value="NOITE"  th:text="Noite"/> 
+                    </select>
+                  </div>
                 
                     <div class="form-group col-md-6">
                   <label class="control-label">Cep:</label>
