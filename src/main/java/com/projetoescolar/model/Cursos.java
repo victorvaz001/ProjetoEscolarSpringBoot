@@ -13,6 +13,47 @@ public class Cursos {
 	private Long id;
 	
 	private String nome;
+		
+	private String estado;
+	
+	private String cidade;
+	
+	private String Unidade;
+	
+	private String tipo;
+	
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUnidade() {
+		return Unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		Unidade = unidade;
+	}
 
 	public Long getId() {
 		return id;

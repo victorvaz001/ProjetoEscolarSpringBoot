@@ -6,7 +6,7 @@
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     
-    <title>Bem Vindo ao Sistema Escolar</title>
+    <title>Lista de professores</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,67 +55,41 @@
 
       <div class="app-title">
         <div>
-          <h1><i class="app-menu__icon fa fa-dashboard"></i> Olá usuário </h1>
+          <h1><i class="fa fa-book"></i> Lista de Cursos </h1>
          
          
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="/acessosistema">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="/acessosistema">Lista de Cursos</a></li>
         </ul>
       </div>
-
-         <div class="row">
-         
-         <div class="col-md-6 col-lg-4">
-          <div class="widget-small primary coloured-icon">
-          <a href="/listadeAlunos" data-toggle="tooltip" data-original-title="Total de alunos cadastrados" style="text-decoration: none;"><i class="icon fa fa-graduation-cap fa-3x"></i></a>
-            <div class="info" th:each="contagemAlunos : ${contAlunosobj}">
-              <h4><a href="/listadeAlunos" data-toggle="tooltip" data-original-title="Total de alunos cadastrados">Alunos</a></h4>
-              <p><a href="/listadeAlunos" data-original-title="Total de alunos cadastrados"><b><span th:text="${contagemAlunos}"> </span></b></a></p>
-            </div>
-          </div>
-        </div>
-        
-         <div class="col-md-6 col-lg-4">
-          <div class="widget-small danger coloured-icon">
-          <a href="/listadeProfessores" data-toggle="tooltip" data-original-title="Total de professores cadastrados" style="text-decoration: none;"><i class="icon fa fa-user-circle-o 2x"></i></a>
-            <div class="info" th:each="contagemAprofessores : ${contProfessoresobj}">
-               <h4><a href="/listadeProfessores" data-toggle="tooltip" data-original-title="Total de professores cadastrados">Professores</a></h4>
-               <p><a href="/listadeProfessores" data-original-title="Total de Professores cadastrados"><b><span th:text="${contagemAprofessores}"> </span></b></a></p>
-            </div>
-          </div>
-        </div>
-        
-         <div class="col-md-6 col-lg-4">
-          <div class="widget-small warning coloured-icon"><i class="icon fa fa-book fa-3x"></i>
-            <div class="info" th:each="contCursos : ${contCursosobj}">
-              <h4><a href="/listadeCursos" data-toggle="tooltip" data-original-title="Cursos disponíveis">Cursos</a></h4>
-             <p><a href="#" data-original-title="Cursos disponíveis"><span th:text="${contCursos}"> </span></a>
-            </div>
-          </div>
-        </div>
-
-          </div>
-          
-           <div class="row">
-        <div class="col-md-6">
+             
+    <div class="row" >
+        <div class="col-md-6" th:each="curso : ${cursoobj}">
           <div class="tile">
-            <h3 class="tile-title">Monthly Sales</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+            <h3 class="tile-title"><span th:text="${curso.nome}"></span></h3>
+            <div class="tile-body">
+           	 <b>Sore o curso</b><br/><br/>
+            	
+            	<b>Tipo:</b>
+            	<p th:text="${curso.tipo}"> </p>
+            	
+            	<b>Unidade disponível:</b>
+            	<p th:text="${curso.unidade}"> </p>
+            	
+            	<b>Estado:</b>
+            	<p th:text="${curso.estado}"> </p>
+            	
+            	<b>Cidade:</b>
+            	<p th:text="${curso.cidade}"> </p>
+            	
             </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-            </div>
+            <div class="tile-footer"><a class="btn btn-primary" href="/cadastroaluno">Fazer inscrição</a></div>
           </div>
         </div>
       </div>
+         
           
     </main>
        <!-- Essential javascripts for application to work-->
@@ -146,59 +120,8 @@
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
      <script type="text/javascript" src="/bootstrap/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/plugins/dataTables.bootstrap.min.js"></script>
-    
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="/bootstrap/js/plugins/chart.js"></script>
-    <script type="text/javascript">
-      var data = {
-      	labels: ["January", "February", "March", "April", "May"],
-      	datasets: [
-      		{
-      			label: "My First dataset",
-      			fillColor: "rgba(220,220,220,0.2)",
-      			strokeColor: "rgba(220,220,220,1)",
-      			pointColor: "rgba(220,220,220,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [65, 59, 80, 81, 56]
-      		},
-      		{
-      			label: "My Second dataset",
-      			fillColor: "rgba(151,187,205,0.2)",
-      			strokeColor: "rgba(151,187,205,1)",
-      			pointColor: "rgba(151,187,205,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(151,187,205,1)",
-      			data: [28, 48, 40, 19, 86]
-      		}
-      	]
-      };
-      var pdata = [
-      	{
-      		value: 300,
-      		color: "#46BFBD",
-      		highlight: "#5AD3D1",
-      		label: "Complete"
-      	},
-      	{
-      		value: 50,
-      		color:"#F7464A",
-      		highlight: "#FF5A5E",
-      		label: "In-Progress"
-      	}
-      ]
-      
-      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      var lineChart = new Chart(ctxl).Line(data);
-      
-      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-      var pieChart = new Chart(ctxp).Pie(pdata);
-    </script>
 
- <!-- Google analytics script-->
-    <script type="text/javascript">
+  <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
       	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

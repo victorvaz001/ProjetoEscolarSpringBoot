@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projetoescolar.model.Aluno;
+import com.projetoescolar.model.Cursos;
 import com.projetoescolar.model.Disciplina;
 import com.projetoescolar.model.Professor;
 import com.projetoescolar.model.StatusDisciplinaAluno;
@@ -72,6 +73,8 @@ public class PessoaController {
 		
 		return andView;
 	}
+	
+	
 	
 	//Metodo ao clicar no bota info da lista de alunos
 	@GetMapping("/detalhealuno/{idaluno}")
@@ -142,6 +145,16 @@ public class PessoaController {
 		andView.addObject("alunos", alunoIt);
 		
 		return andView;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/listadeCursos")
+	public ModelAndView listadeCursos() {
+		
+		ModelAndView modelAndView = new ModelAndView("listas/listadeCursos");
+		Iterable<Cursos> cursosIt = cursoRepository.findAll();
+		modelAndView.addObject("cursoobj", cursosIt);
+		return modelAndView;
+		
 	}
 	
 	
